@@ -4,21 +4,23 @@ import Form from '../../components/form/form'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../services/auth'
 import { validateEmail } from '../../helper/utils'
+import Footer from '../../components/footer/footer'
+import foodImg from '../../assets/food_auth.png'
 
 export default function Register() {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: "",
+        phone: "",
         email: "",
-        password: "",
-        confirmPassword: ""
+        password: ""
     })
 
     const [error, setError] = useState({
         name: false,
+        phone: false,
         email: false,
-        password: false,
-        confirmPassword: false
+        password: false
     })
 
     const formFields = [
@@ -28,8 +30,20 @@ export default function Register() {
             type: "text",
             value: formData?.name,
             onChange: (e) => {
-                setFormData({...formData, name: e.target.value})
-                setError({...error, name: false})
+                setFormData({ ...formData, name: e.target.value })
+                setError({ ...error, name: false })
+            },
+        },
+        {
+            name: "phone",
+            placeholder: "Enter your 10 digit mobile number",
+            type: "tel",
+            value: formData?.phone,
+            onChange: (e) => {
+                setFormData({ ...formData, phone: e.target.value })
+                if (formData?.password == e.target.value) {
+                    setError({ ...error, phone: false })
+                }
             },
         },
         {
@@ -38,8 +52,8 @@ export default function Register() {
             type: "email",
             value: formData?.email,
             onChange: (e) => {
-                setFormData({...formData, email: e.target.value})
-                setError({...error, email: false})
+                setFormData({ ...formData, email: e.target.value })
+                setError({ ...error, email: false })
             },
         },
         {
@@ -49,21 +63,8 @@ export default function Register() {
             value: formData?.password,
             showPassword: false,
             onChange: (e) => {
-                setFormData({...formData, password: e.target.value})
-                setError({...error, password: false})
-            },
-        },
-        {
-            name: "confirmPassword",
-            placeholder: "Confirm Password",
-            type: "password",
-            value: formData?.confirmPassword,
-            showPassword: false,
-            onChange: (e) => {
-                setFormData({...formData, confirmPassword: e.target.value})
-                if(formData?.password == e.target.value) {      
-                    setError({...error, confirmPassword: false})
-                }
+                setFormData({ ...formData, password: e.target.value })
+                setError({ ...error, password: false })
             },
         }
     ]
@@ -73,47 +74,47 @@ export default function Register() {
             message: "Enter your name",
             isValid: formData?.name.length > 0,
             onError: () => {
-                setError((error)=>({...error, name: true}))
+                setError((error) => ({ ...error, name: true }))
             }
         },
         email: {
             message: "Enter valid email address",
             isValid: validateEmail(formData?.email),
             onError: () => {
-                setError((error)=>({...error, email: true}))
+                setError((error) => ({ ...error, email: true }))
             }
-        }, 
+        },
         password: {
             message: "Password should be min 8 characters",
             isValid: formData.password.length >= 8,
             onError: () => {
-                setError((error)=>({...error, password: true}))
+                setError((error) => ({ ...error, password: true }))
             }
         },
-        confirmPassword: {
-            message: "Passwords do not match",
-            isValid: formData.password === formData.confirmPassword,
+        phone: {
+            message: "Enter valid mobile number",
+            isValid: formData.phone && formData.phone.length === 10,
             onError: () => {
-                setError((error)=>({...error, confirmPassword: true}))
+                setError((error) => ({ ...error, phone: true }))
             }
         },
     }
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         let isError = false
         Object.keys(errorMessages).map((key) => {
-            if(!errorMessages[key].isValid) {
+            if (!errorMessages[key].isValid) {
                 isError = true
                 errorMessages[key].onError()
             }
         })
-        if(!isError){
+        if (!isError) {
             const res = await registerUser(formData)
-            
-            if(res.status == 200) {
+
+            if (res.status == 200) {
                 navigate('/login')
-            } else{
+            } else {
                 alert("ERROR")
             }
         } else {
@@ -122,26 +123,28 @@ export default function Register() {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.container1}>
-                <div className={styles.circleContainer}>
+        <div className={styles.parentContainer}>
+            <div className={styles.container}>
+                <div className={styles.container2}>
+                    <img src='./logo.png' alt='logo' className={styles.logo} />
+                    <p className={styles.headerText}>Welcome  👋</p>
+                    <p>Today is a new day. It's your day. You shape it.
+                        Sign up to start ordering.</p>
+                    <Form
+                        formFields={formFields}
+                        errorMessages={errorMessages}
+                        error={error}
+                        onSubmit={onSubmit}
+                        buttonText={"Register"}
+                    />
+                    <p className={styles.lightText}>Have an account ?</p>
+                    <button className={styles.buttonStyle} onClick={() => navigate('/login')}>Login</button>
                 </div>
-                <img alt='Asto image' className={styles.imageStyle}/>
-                <p className={styles.imageBigText}>Welcome aboard my friend</p>
-                <p className={styles.imageSmallText}>just a couple of clicks and we start</p>
+                <div className={styles.container1}>
+                    <img src={foodImg} alt='food image' className={styles.imageStyle} />
+                </div>
             </div>
-            <div className={styles.container2}>
-                <p className={styles.headerText}>Register</p>
-                <Form 
-                    formFields={formFields}
-                    errorMessages={errorMessages}
-                    error={error}
-                    onSubmit={onSubmit}
-                    buttonText={"Register"}
-                />
-                <p className={styles.lightText}>Have an account ?</p>
-                <button className={styles.buttonStyle} onClick={() => navigate('/login')}>Login</button>
-            </div>
+            <Footer />
         </div>
     )
 }

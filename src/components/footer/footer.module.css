@@ -1,0 +1,107 @@
+footer {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.topSection {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #f7f7f7;
+}
+
+.logoAndApps {
+    flex: 1;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.appLinks img {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.newsletter {
+    flex: 1;
+}
+
+.newsletter h3 {
+    font-size: 18px;
+}
+
+.subscribe {
+    display: flex;
+    margin-top: 10px;
+}
+
+.subscribe input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.subscribe button {
+    background-color: orange;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.socialIcons {
+    margin-top: 10px;
+}
+
+.socialIcons i {
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.links {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.links a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.bottomSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c1c1c;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.bottomLinks a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.bottomLinks a:hover {
+    text-decoration: underline;
+}

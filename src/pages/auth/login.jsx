@@ -4,12 +4,14 @@ import Form from '../../components/form/form'
 import { useNavigate } from 'react-router-dom'
 import { getIdFromToken, validateEmail } from '../../helper/utils'
 import { loginUser } from '../../services/auth'
+import Footer from '../../components/footer/footer'
+import foodImg from '../../assets/food_auth.png'
 
 export default function Login() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(getIdFromToken()) {
+        if (getIdFromToken()) {
             // navigate('/')
         }
     }, [])
@@ -29,14 +31,14 @@ export default function Login() {
             message: "Enter valid email address",
             isValid: validateEmail(formData?.email),
             onError: () => {
-                setError((error)=>({...error, email: true}))
+                setError((error) => ({ ...error, email: true }))
             }
-        }, 
+        },
         password: {
             message: "Password should be min 8 characters",
             isValid: formData.password.length >= 8,
             onError: () => {
-                setError((error)=>({...error, password: true}))
+                setError((error) => ({ ...error, password: true }))
             }
         }
     }
@@ -48,8 +50,8 @@ export default function Login() {
             type: "email",
             value: formData?.email,
             onChange: (e) => {
-                setFormData({...formData, email: e.target.value})
-                setError({...error, email: false})
+                setFormData({ ...formData, email: e.target.value })
+                setError({ ...error, email: false })
             },
         },
         {
@@ -59,29 +61,29 @@ export default function Login() {
             value: formData?.password,
             showPassword: false,
             onChange: (e) => {
-                setFormData({...formData, password: e.target.value})
-                setError({...error, password: false})
+                setFormData({ ...formData, password: e.target.value })
+                setError({ ...error, password: false })
             },
         }
     ]
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         let isError = false
         Object.keys(errorMessages).map((key) => {
-            if(!errorMessages[key].isValid) {
+            if (!errorMessages[key].isValid) {
                 isError = true
                 errorMessages[key].onError()
             }
         })
-        if(!isError){
+        if (!isError) {
             const res = await loginUser(formData)
-            
-            if(res.status == 200) {
+
+            if (res.status == 200) {
                 alert(res.data.message)
                 localStorage.setItem('token', res.data.token)
                 navigate('/')
-            } else{
+            } else {
                 alert(res.message)
             }
         } else {
@@ -90,26 +92,28 @@ export default function Login() {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.container1}>
-                <div className={styles.circleContainer}>
+        <div className={styles.parentContainer}>
+            <div className={styles.container}>
+                <div className={styles.container2}>
+                    <img src='./logo.png' alt='logo' className={styles.logo} />
+                    <p className={styles.headerText}>Welcome  👋</p>
+                    <p>Today is a new day. It's your day. You shape it. 
+                    Sign in to start ordering.</p>
+                    <Form
+                        formFields={formFields}
+                        errorMessages={errorMessages}
+                        error={error}
+                        onSubmit={onSubmit}
+                        buttonText={"Login"}
+                    />
+                    <p className={styles.lightText}>Have no account yet ?</p>
+                    <button className={styles.buttonStyle} onClick={() => navigate('/register')}>Register</button>
                 </div>
-                <img  alt='Asto image' className={styles.imageStyle}/>
-                <p className={styles.imageBigText}>Welcome aboard my friend</p>
-                <p className={styles.imageSmallText}>just a couple of clicks and we start</p>
+                <div className={styles.container1}>
+                    <img src={foodImg} alt='food image' className={styles.imageStyle} />
+                </div>
             </div>
-            <div className={styles.container2}>
-                <p className={styles.headerText}>Login</p>
-                <Form 
-                    formFields={formFields}
-                    errorMessages={errorMessages}
-                    error={error}
-                    onSubmit={onSubmit}
-                    buttonText={"Login"}
-                />
-                <p className={styles.lightText}>Have no account yet ?</p>
-                <button className={styles.buttonStyle} onClick={() => navigate('/register')}>Register</button>
-            </div>
+            <Footer />
         </div>
     )
 }
