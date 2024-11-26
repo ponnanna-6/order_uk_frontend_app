@@ -1,0 +1,205 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 0.2rem;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 12px 12px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100px;
+  }
+  
+  .logo span {
+    color: orange;
+  }
+  
+  .location {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .location span {
+    color: #FC8A06;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .offer {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .offer span {
+    color: #FC8A06;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .cart {
+    background-color: green;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 0.2rem;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 12px 12px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 2rem;
+  }
+
+  .navBar button {
+    padding: 0.5rem 1rem;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .popularCategories {
+    padding: 2rem;
+    background-color: #fdfdfd;
+  }
+  
+  .popularCategories h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .popularCategories .categoriesList {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .popularCategories .categoriesList img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    background-color: #fff;
+  }
+  
+  .popularRestaurants {
+    padding: 2rem;
+    background-color: #fff;
+  }
+  
+  .popularRestaurants h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .popularRestaurants .restaurantLogos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .popularRestaurants .restaurantLogos img {
+    width: 120px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .partnerSection, .rideSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+  }
+  
+  .partnerSection img, .rideSection img {
+    width: 45%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .partnerSection div, .rideSection div {
+    width: 45%;
+  }
+  
+  .partnerSection h3, .rideSection h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .partnerSection p, .rideSection p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .partnerSection button, .rideSection button {
+    padding: 0.7rem 1rem;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  .aboutUsSection {
+    padding: 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .aboutUsSection h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .aboutUsSection .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .aboutUsSection .stats div {
+    text-align: center;
+  }
+  
+  .aboutUsSection .stats div h3 {
+    font-size: 1.2rem;
+    color: orange;
+  }
+  
+  .aboutUsSection .stats div p {
+    font-size: 1rem;
+    color: #777;
+  }
+  

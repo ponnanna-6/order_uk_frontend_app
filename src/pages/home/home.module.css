@@ -1,0 +1,133 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.heroSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #fdfdfd;
+}
+
+.heroContent h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.heroContent h1 span {
+    color: orange;
+}
+
+.heroContent p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1rem 0;
+}
+
+.searchBar {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.searchBar input {
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.searchBar button {
+    padding: 0.7rem 1rem;
+    background-color: orange;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.heroImage img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.offersSection {
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.offersSection h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.offersSection .categories {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.offersSection .categories button {
+    padding: 0.5rem 1rem;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.offersSection .categories .active {
+    background-color: orange;
+    color: white;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.cardDetails {
+    padding: 1rem;
+}
+
+.cardDetails p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.cardDetails h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.discount {
+    font-size: 1rem;
+    color: red;
+    font-weight: bold;
+}
+
+.popularCategories {
+    padding: 2rem;
+    background-color: #fff;
+}

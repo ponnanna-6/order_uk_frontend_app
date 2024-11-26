@@ -13,7 +13,7 @@ const Footer = () => {
     <footer>
       <div className={styles.topSection}>
         <div className={styles.logoAndApps}>
-          <h2 className={styles.logo}>Order.uk</h2>
+          <img src="/logo.png" alt="logo" className={styles.logo} />
           <div className={styles.appLinks}>
             <img src={appStoreImg} alt="App Store" />
             <img src={playStoreImg} alt="Google Play" />
