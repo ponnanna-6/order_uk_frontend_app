@@ -8,6 +8,9 @@ import { AdvancedImage } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import Footer from '../../components/footer/footer';
 import { PopularRestaurants } from '../../components/popularRestaurants/popularRestaurants';
+import { Hero2Section } from '../../components/hero2/hero2';
+import FAQ from '../../components/FAQ/FAQ';
+import Stats from '../../components/stats/stats';
 
 const cld = new Cloudinary({
     cloud: {
@@ -25,6 +28,25 @@ const Home = () => {
         pasta: `${popularCategoriesPath}/pasta`,
         breakfast: `${popularCategoriesPath}/breakfast`,
     }
+
+    const cards = [
+        {
+            id: 1,
+            image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1732635225/cuvette-food-app/partner.png',
+            badge: 'Earn more with lower fees',
+            subtitle: 'Signup as a business',
+            title: 'Partner with us',
+            buttonText: 'Get Started',
+        },
+        {
+            id: 2,
+            image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1732635225/cuvette-food-app/rider.png',
+            badge: 'Avail exclusive perks',
+            subtitle: 'Signup as a rider',
+            title: 'Ride with us',
+            buttonText: 'Get Started',
+        },
+    ];
 
     return (
         <div className={styles.container}>
@@ -86,52 +108,44 @@ const Home = () => {
                 <h2>Order.uk Popular Categories</h2>
                 <div className={styles.cards}>
                     {Object.keys(popularCategoriesItems).map((category) => (
-                        <div key={category} className={styles.category}>
-                            <AdvancedImage cldImg={cld.image(popularCategoriesItems[category]).resize(fill().width(100).height(100))} />
+                        <div key={category} className={styles.card}>
+                            <AdvancedImage cldImg={cld.image(popularCategoriesItems[category])} />
                             <p>{category}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
-            <PopularRestaurants/>
-            {/* Partner Section */}
-            <section className={styles.partnerSection}>
-                <div>
-                    <h3>Partner with us</h3>
-                    <p>Join our platform and reach thousands of customers daily.</p>
-                    <button>Learn More</button>
-                </div>
-                <img src="partner.jpg" alt="Partner with us" />
+            {/* Popular Categories */}
+            <PopularRestaurants />
+
+            {/* Hero 2 Section */}
+            <Hero2Section />
+
+            {/* Partner Ride Section */}
+            <section className={styles.partnerRiderSection}>
+                {cards.map((card) => (
+                    <div key={card.id} className={styles.cardPR}>
+                        <div className={styles.imageContainer}>
+                            <img src={card.image} alt={card.title} />
+                            <span className={styles.badge}>{card.badge}</span>
+                            <div className={styles.content}>
+                                <p className={styles.subtitle}>{card.subtitle}</p>
+                                <h3 className={styles.title}>{card.title}</h3>
+                                <button className={styles.button}>{card.buttonText}</button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </section>
 
-            {/* Ride Section */}
-            <section className={styles.rideSection}>
-                <img src="ride.jpg" alt="Ride with us" />
-                <div>
-                    <h3>Ride with us</h3>
-                    <p>Become a delivery partner and earn on your schedule.</p>
-                    <button>Join Now</button>
-                </div>
-            </section>
+            {/*FAQ*/}
+            <FAQ/>
+
             {/* About Us Section */}
-            <section className={styles.aboutUsSection}>
-                <h2>Know more about us!</h2>
-                <div className={styles.stats}>
-                    <div>
-                        <h3>546+</h3>
-                        <p>Restaurants</p>
-                    </div>
-                    <div>
-                        <h3>789,900+</h3>
-                        <p>Orders Delivered</p>
-                    </div>
-                    <div>
-                        <h3>17,457+</h3>
-                        <p>Delivery Partners</p>
-                    </div>
-                </div>
-            </section>
+            <Stats/>
+
+            {/* Footer Section */}
             <Footer />
         </div>
     );

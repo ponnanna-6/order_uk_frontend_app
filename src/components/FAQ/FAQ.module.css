@@ -1,0 +1,51 @@
+.faqContainer {
+    padding: 2rem;
+    background-color: #f5f5f5;
+}
+
+.faqHeader {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.faqItem {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.faqQuestion {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faqAnswer {
+    margin-top: 1rem;
+}
+
+.faqStats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.faqStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faqStatValue {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.faqStatLabel {
+    font-size: 1rem;
+    color: #666;
+}

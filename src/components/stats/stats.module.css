@@ -1,0 +1,27 @@
+.faqStats {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+    background-color: #FC8A06;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.faqStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faqStatValue {
+    font-size: 2rem;
+    color: #FFFFFF;
+    font-weight: 200;
+}
+
+.faqStatLabel {
+    font-family: Poppins;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    font-weight: 500;
+}
