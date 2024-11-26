@@ -8,7 +8,7 @@ const cld = new Cloudinary({
         cloudName: "dgs9nsrid"
     }
 });
-export function PopularRestaurants() {
+export function PopularRestaurants({title}) {
     const restaurantsPath = "cuvette-food-app/Popular restaurants"
     const restaurantLogos = {
         mc_d: `${restaurantsPath}/mc_d`,
@@ -19,7 +19,7 @@ export function PopularRestaurants() {
         shaurma: `${restaurantsPath}/shaurma`,
     }
     return (< section className={styles.popularRestaurants} >
-        <h2>Popular Restaurants</h2>
+        <h2>{title}</h2>
         <div className={styles.restaurantLogos}>
             {Object.keys(restaurantLogos).map((restaurants) => (
                 <div key={restaurants} className={styles.restaurantLogo}>
