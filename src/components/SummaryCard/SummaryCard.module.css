@@ -49,6 +49,13 @@
     text-align: left;
 }
 
+
+.cardImg {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+}
+
 .subtitle {
     font-size: 14px;
     color: #FC8A06;

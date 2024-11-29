@@ -1,5 +1,5 @@
 // HomeScreen.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './home.module.css';
 import food1 from '../../assets/food/food1.png'
 import Header from '../../components/header/header';
@@ -11,6 +11,7 @@ import { PopularRestaurants } from '../../components/popularRestaurants/popularR
 import { Hero2Section } from '../../components/hero2/hero2';
 import FAQ from '../../components/FAQ/FAQ';
 import Stats from '../../components/stats/stats';
+import { getAllRestaurants, getRestaurantById} from '../../services/restaurant';
 
 const cld = new Cloudinary({
     cloud: {
@@ -19,6 +20,8 @@ const cld = new Cloudinary({
     }
 });
 const Home = () => {
+    const [restaurants, setRestaurants] = useState([]);
+
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
     const popularCategoriesItems = {
         burger: `${popularCategoriesPath}/burger`,
@@ -47,6 +50,15 @@ const Home = () => {
             buttonText: 'Get Started',
         },
     ];
+
+    useEffect(() => {
+        const getData = async() => {
+            const restaurantData = await getAllRestaurants()
+            console.log(restaurantData.data)
+            setRestaurants(restaurantData.data)
+        }
+        getData()
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -117,7 +129,7 @@ const Home = () => {
             </section>
 
             {/* Popular Categories */}
-            <PopularRestaurants title={"Popular Restaurants"}/>
+            <PopularRestaurants title={"Popular Restaurants"} data={restaurants}/>
 
             {/* Hero 2 Section */}
             <Hero2Section />

@@ -1,32 +1,28 @@
+import RatingCard from '../ratingCard/ratingCard'
 import styles from './SummaryCard.module.css'
 
-export default function SummaryCard() {
-    const card = {
-        id: 1,
-        image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1732635225/cuvette-food-app/partner.png',
-        subtitle: 'Im loving it',
-        title: 'Mc donalds east london',
-        minOrder: "$100",
-        deliveryTime: "30 min",
-        openTill: "3:00 PM"
-    }
-
+export default function SummaryCard({restaurantData}) {
+console.log("SUMMARY CARD DATA: ", restaurantData)
     return (
         <section className={styles.container}>
-            <div key={card.id} className={styles.cardPR}>
+            <div key={restaurantData._id} className={styles.cardPR}>
                 <div className={styles.imageContainer}>
-                    <img src={card.image} alt={card.title} />
+                    <img src={restaurantData.bgImg} alt={restaurantData.title} />
                     <div className={styles.content}>
-                        <p className={styles.subtitle}>{card.subtitle}</p>
-                        <h3 className={styles.title}>{card.title}</h3>
+                        <p className={styles.subtitle}>{restaurantData.tagLine}</p>
+                        <h3 className={styles.title}>{restaurantData.name}</h3>
                         <div style={{ display: "flex", flexDirection: "row"}}>
-                            <div className={styles.button}>{card.minOrder}</div>
-                            <div className={styles.button}>{card.deliveryTime}</div>
+                            <div className={styles.button}>{`Minimum Order: $${restaurantData.minOrder}`}</div>
+                            <div className={styles.button}>{`Delivery In: ${parseInt(restaurantData.deliveryTime)-5}-${restaurantData.deliveryTime} Minutes`}</div>
                         </div>
+                    </div>
+                    <div className={styles.cardImg}>
+                        <img src={restaurantData.logo} alt={restaurantData.title}/>
+                        <RatingCard rating={restaurantData.rating}/>
                     </div>
                 </div>
                 <div className={styles.openInfo}>
-                    <h3>{`Open until ${card.openTill}`}</h3>
+                    <h3>{`Open until ${restaurantData.openTill}`}</h3>
                 </div>
             </div>
         </section>
