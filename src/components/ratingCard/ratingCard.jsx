@@ -21,7 +21,7 @@ function RatingCard({ rating }) {
 
     return (
         <section className={styles.container}>
-            <p>{rating}</p>
+            <h3>{rating}</h3>
 
             <div>
                 {/* Render full stars */}
@@ -40,7 +40,7 @@ function RatingCard({ rating }) {
                 ))}
             </div>
 
-            <p>1370 reviews</p>
+            <p className={styles.reviews}>1370 reviews</p>
         </section>
     );
 }

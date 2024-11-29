@@ -1,19 +1,20 @@
 .container {
-    width: 100px;
-    height: 100px;
-    background-color: white;
-    border-radius: 12px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
 }
 
-.container div {
+.container h3 {
+    font-size: 36px;
+    color: #333;
+    margin: 0;
+}
+
+.reviews {
     text-align: center;
     font-size: 14px;
-    line-height: 10px;
-}
-
-.container p {
-    text-align: center;
-    font-size: 12px;
-    line-height: 10px;
-    color: gray;
+    color: #555;
 }

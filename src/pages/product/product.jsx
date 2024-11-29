@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import SummaryCard from '../../components/SummaryCard/SummaryCard';
 import MapWithInfoCard from '../../components/map/map';
 import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
+import { InfoSection } from '../../components/infoSection/infoSection';
+import { CustomerReviews } from '../../components/customerReviews/customerReviews';
 
 
 const Product = () => {
@@ -36,8 +38,14 @@ const Product = () => {
             {/* Product Summary */}
             <SummaryCard restaurantData={restaturantById}/>
 
+            {/* Info Section */}
+            <InfoSection/>
+
             {/* Map */}
             <MapWithInfoCard/>
+
+            {/* Customer Reviews */ }
+            <CustomerReviews/>
 
             {/* Popular Restaurants */ }
             <PopularRestaurants title={"Similar Restaurants"} data={restaurants}/>
