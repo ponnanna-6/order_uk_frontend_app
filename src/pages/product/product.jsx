@@ -23,6 +23,7 @@ const Product = () => {
     const [fooditems, setFoodItems] = useState([])
     const [cartData, setCartData] = useState([])
     const [allFoodItems, setAllFoodItems] = useState([])
+    const [shouldRefetchCart, setShouldRefetchCart] = useState(false);
 
     const { id } = useParams();
     const position = [51.505, -0.09];
@@ -47,15 +48,19 @@ const Product = () => {
             setFoodItems(foodItemsByCategory)
         }
 
-        const getCartData = async () => {
-            const cartData = await getCartById()
-            setCartData(cartData.data.cart.items)
-            console.log("cartData.data: ", cartData.data.cart.items)
-        }
         window.scrollTo(0, 0);
         getData()
-        getCartData()
     }, [])
+
+    useEffect(() => {
+        console.log("refetching cart")
+        const getCartData = async () => {
+            const cartData = await getCartById();
+            setCartData(cartData.data.cart.items);
+        };
+
+        getCartData();
+    }, [shouldRefetchCart]);
 
     const addItemToCart = async (itemId) => {
         const tempCartData = cartData
@@ -64,7 +69,7 @@ const Product = () => {
 
         if (itemIndex !== -1) {
             tempCartData[itemIndex].quantity += 1;
-            setCartData(tempCartData);
+            await addItemsToCart({ items: tempCartData })
         } else {
             const newItem = {
                 foodItem: itemId,
@@ -76,9 +81,9 @@ const Product = () => {
                 },
                 quantity: 1
             };
-            setCartData([...tempCartData, newItem]);
+            await addItemsToCart({ items: [...tempCartData, newItem] })
         }
-        await addItemsToCart({ items: tempCartData })
+        setShouldRefetchCart(!shouldRefetchCart)
     };
 
     const removeItemFromCart = async (itemId) => {
@@ -94,6 +99,7 @@ const Product = () => {
             setCartData(tempCartData);
             await addItemsToCart({ items: tempCartData });
         }
+        setShouldRefetchCart(!shouldRefetchCart)
     };
 
     return (
@@ -129,7 +135,6 @@ const Product = () => {
             <div className={styles.cartContainer}>
                 <Cart
                     items={cartData || []}
-                    total={100}
                     discounts={12}
                     deliveryFee={5}
                     removeItemFromCart={removeItemFromCart}

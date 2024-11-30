@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./foodCard.module.css";
 import { IoAddCircleSharp } from "react-icons/io5";
 
-const FoodCard = ({id, name, price, description, img, addItemToCart}) => {
+const FoodCard = ({ id, name, price, description, img, addItemToCart }) => {
   return (
     <div className={styles.foodCard}>
       <div className={styles.foodHeader}>
@@ -12,12 +12,12 @@ const FoodCard = ({id, name, price, description, img, addItemToCart}) => {
       <div className={styles.foodDetails}>
         <img src={img} alt={name} />
         <div className={styles.extras}>
-            <span className={styles.extra}>
-                {description}
-            </span>
+          <span className={styles.extra}>
+            {description}
+          </span>
         </div>
-        
-        <IoAddCircleSharp className={styles.addButton} onClick={() => addItemToCart(id)}/>
+
+        <IoAddCircleSharp className={styles.addButton} onClick={() => addItemToCart(id)} />
       </div>
     </div>
   );

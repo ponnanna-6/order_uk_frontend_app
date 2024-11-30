@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styles from './cart.module.css';
 import { MdDeleteForever } from "react-icons/md";
 
-const Cart = ({ items, total, discounts, deliveryFee, removeItemFromCart}) => {
-  console.log("CARD: ", items)
+const Cart = ({ items, discounts, deliveryFee, removeItemFromCart}) => {
+
+  const total = useMemo(() => {
+    return Object.values(items).reduce((acc, item) => {
+      return acc + item.foodInfo.price * item.quantity;
+    }, 0);
+  }, [items]);
+
+  useEffect(() => {
+    console.log('Cart component reloaded');
+  }, [items]);
+
   return (
     <div className={styles.cart}>
       <h2 className={styles.title}>My Basket</h2>
@@ -14,7 +24,7 @@ const Cart = ({ items, total, discounts, deliveryFee, removeItemFromCart}) => {
               <span className={styles.quantity}>{`${item.quantity} x`}</span>
               <span className={styles.name}>{item.foodInfo.name}</span>
             </div>
-            <span className={styles.price}>£{item.foodInfo.price.toFixed(2)}</span>
+            <span className={styles.price}>£{item.foodInfo.price.toFixed(2)*item.quantity}</span>
             <MdDeleteForever className={styles.delete} onClick={() => removeItemFromCart(item.foodItem)}/>
           </div>
         ))}
