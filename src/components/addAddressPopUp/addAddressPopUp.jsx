@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
 import styles from './addAddressPopup.module.css';
-import { addAddress } from '../../services/userInfo';
+import { addAddress, updateAddress } from '../../services/userInfo';
 
-const AddAddressPopup = ({ onClose }) => {
+const AddAddressPopup = ({ onClose, editInfo}) => {
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
     const [pinCode, setPinCode] = useState('');
-    const [phone, setPhone] = useState('');
-    const [fullAddress, setFullAddress] = useState('');
+    const [phone, setPhone] = useState(editInfo ? editInfo.phoneNumber : '');
+    const [fullAddress, setFullAddress] = useState(editInfo ? editInfo.address : '');
+    const [fromEdit, setFromEdit] = useState(editInfo ? true : false);
 
     const handleSubmit = async() => {
-        if (!state || !city || !pinCode || !phone || !fullAddress) {
+        if (!phone || !fullAddress) {
             alert('Please fill out all fields.');
             return;
         }
 
         const address = {
-            address: `${fullAddress}, ${city}, ${state}, ${pinCode}`,
+            address: `${fullAddress} ${city} ${state} ${pinCode}`.trim(),
             phoneNumber: phone,
             default: false
         };
-        const res = await addAddress(address)
+        let res=""
+
+        if(fromEdit) {
+            res = await updateAddress(editInfo._id, address)
+        } else {
+            res = await addAddress(address)
+        }
         if (res.status == 200) {
             onClose();
         }

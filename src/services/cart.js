@@ -32,3 +32,19 @@ export const addItemsToCart = async (data) => {
     };
   }
 };
+
+export const deleteItemFromCart = async (id) => {
+  try {
+    const headers = addTokenToHeader({ headers: {} });
+    const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/cart/delete/`, { headers});
+    return {
+      status: res?.status,
+      data: res?.data
+    };
+  } catch (error) {
+    return {
+      status: error?.status ? error.status : 500,
+      message: error?.response?.data?.message ? error.response.data.message : "Something went wrong"
+    };
+  }
+};

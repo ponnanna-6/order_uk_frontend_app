@@ -21,7 +21,7 @@ export const addAddress = async (data) => {
 export const updateAddress = async (id, data) => {
   try {
     const headers = addTokenToHeader({ headers: {} });
-    const res = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/v1/user/address/update/${id}`, {updateAddress: data}, { headers });
+    const res = await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/v1/user/address/update/${id}`, {updatedAddress: data}, { headers });
 
     return {
       status: res.status,

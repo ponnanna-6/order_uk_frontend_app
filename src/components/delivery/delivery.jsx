@@ -5,20 +5,19 @@ import { UserContext } from '../../contexts/userContext';
 import AddAddressPopup from '../addAddressPopUp/addAddressPopUp';
 import { deleteAddress } from '../../services/userInfo';
 
-const Delivery = ({ onBack, onEdit, onSetDefault }) => {
+const Delivery = ({ onBack, onSetDefault }) => {
     let userInfo = useContext(UserContext);
     const addresses = userInfo.Addresses;
 
     const [showAddAddressPopup, setShowAddAddressPopup] = useState(false);
     const [refetchData, setRefetchData] = useState(true);
+    const [editInfo, setEditInfo] = useState({});
 
     useEffect(() => {
-        // userInfo = useContext(UserContext);
         console.log(userInfo);
     }, [refetchData]);
 
     const onRemove = async(id) => {
-        console.log("onRemove", id);
         await deleteAddress(id);
         setRefetchData(!refetchData);
     };
@@ -26,6 +25,16 @@ const Delivery = ({ onBack, onEdit, onSetDefault }) => {
     const onSave = () => {
         setShowAddAddressPopup(false);
         setRefetchData(!refetchData);
+    };
+
+    const onEdit = (address) => {
+        setEditInfo(address);
+        setShowAddAddressPopup(true);
+    };
+
+    const onAdd = () => {
+        setEditInfo({});
+        setShowAddAddressPopup(true);
     };
 
     return (
@@ -36,7 +45,7 @@ const Delivery = ({ onBack, onEdit, onSetDefault }) => {
 
                 {/* Address Cards */}
                 <div className={styles.cardContainer}>
-                    <div className={styles.card} onClick={() => setShowAddAddressPopup(true)} style={{ border: '2px dashed #ddd', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+                    <div className={styles.card} onClick={onAdd} style={{ border: '2px dashed #ddd', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
                         <h4 style={{ fontSize: '20px', color: '#f4b400' }}>+ Add Address</h4>
                     </div>
                     {addresses.map((address, index) => (
@@ -46,7 +55,7 @@ const Delivery = ({ onBack, onEdit, onSetDefault }) => {
                             <p>Phone Number: {address.phoneNumber}</p>
                             {address.isDefault && <div className={styles.defaultBadge}>Default</div>}
                             <div className={styles.editRemove}>
-                                <span onClick={() => onEdit(index)}>Edit</span>
+                                <span onClick={() => onEdit(address)}>Edit</span>
                                 <span onClick={() => onRemove(address._id)}>Remove</span>
                             </div>
                             {!address.isDefault && (
@@ -59,6 +68,7 @@ const Delivery = ({ onBack, onEdit, onSetDefault }) => {
                     <AddAddressPopup 
                         onClose={() => setShowAddAddressPopup(false)}
                         onSave={onSave}
+                        editInfo={editInfo}
                     />
                 }
             </div>
