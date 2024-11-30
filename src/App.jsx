@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Register, Login, Home } from './pages'
+import { Register, Login, Home, Checkout} from './pages'
 import Product from './pages/product/product'
 import { useEffect, useState } from 'react';
 import { getUserInfo } from './services/auth';
@@ -25,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<Home />} />
           <Route path='/restaurant/:id' element={<Product />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

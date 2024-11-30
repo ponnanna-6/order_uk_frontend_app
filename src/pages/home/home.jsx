@@ -19,8 +19,6 @@ const cld = new Cloudinary({
     }
 });
 const Home = () => {
-    const [restaurants, setRestaurants] = useState([]);
-
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
     const popularCategoriesItems = {
         burger: `${popularCategoriesPath}/burger`,
@@ -49,14 +47,6 @@ const Home = () => {
             buttonText: 'Get Started',
         },
     ];
-
-    useEffect(() => {
-        const getData = async () => {
-            const restaurantData = await getAllRestaurants()
-            setRestaurants(restaurantData.data)
-        }
-        getData()
-    }, [])
 
     return (
         <div className={styles.container}>
@@ -127,7 +117,7 @@ const Home = () => {
             </section>
 
             {/* Popular Categories */}
-            <PopularRestaurants title={"Popular Restaurants"} data={restaurants} />
+            <PopularRestaurants/>
 
             {/* Hero 2 Section */}
             <Hero2Section />

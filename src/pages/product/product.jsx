@@ -18,7 +18,6 @@ import { addItemsToCart, getCartById } from '../../services/cart';
 
 
 const Product = () => {
-    const [restaurants, setRestaurants] = useState([])
     const [restaturantById, setRestautantById] = useState([])
     const [fooditems, setFoodItems] = useState([])
     const [cartData, setCartData] = useState([])
@@ -30,11 +29,9 @@ const Product = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const restaurantData = await getAllRestaurants()
             const restaturantById = await getRestaurantById(id)
             const fooditems = await getAllFood()
 
-            setRestaurants(restaurantData.data)
             setRestautantById(restaturantById.data)
             setAllFoodItems(fooditems.data)
 
@@ -77,7 +74,8 @@ const Product = () => {
                     name: foodById.name,
                     category: foodById.category,
                     description: foodById.description,
-                    price: foodById.price
+                    price: foodById.price,
+                    image: foodById.image
                 },
                 quantity: 1
             };
@@ -133,12 +131,12 @@ const Product = () => {
             </div>
 
             <div className={styles.cartContainer}>
-                <Cart
+                {cartData.length > 0 && <Cart
                     items={cartData || []}
                     discounts={12}
                     deliveryFee={5}
                     removeItemFromCart={removeItemFromCart}
-                />
+                />}
             </div>
 
             {/* Info Section */}
@@ -151,7 +149,7 @@ const Product = () => {
             <CustomerReviews />
 
             {/* Popular Restaurants */}
-            <PopularRestaurants title={"Similar Restaurants"} data={restaurants} />
+            <PopularRestaurants/>
 
             {/* Footer Section */}
             <Footer />

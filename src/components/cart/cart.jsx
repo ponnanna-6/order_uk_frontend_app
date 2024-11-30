@@ -53,7 +53,7 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart}) => {
           <input type="text" placeholder="Apply Coupon Code here" />
           <button>Apply</button>
         </div>
-        <button className={styles.checkout}>Checkout</button>
+        <button className={styles.checkout} onClick={() => window.location.href = '/checkout'}>Checkout</button>
       </div>
     </div>
   );
