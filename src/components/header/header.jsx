@@ -23,7 +23,7 @@ const Header = () => {
         <button>Restaurants</button>
         <button>Track Order</button>
         {userInfo?.name 
-          ? <div className={styles.cart}>{userInfo?.name}</div>
+          ? <div className={styles.cart} onClick={() => window.location.href = '/profile'}>{userInfo?.name}</div>
           : <div className={styles.cart} onClick={() => window.location.href = '/login'}>{'Login/Register'}</div>
         }
       </section>
