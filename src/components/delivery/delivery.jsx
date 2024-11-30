@@ -1,14 +1,33 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import styles from './delivery.module.css';
 import { UserContext } from '../../contexts/userContext';
 import AddAddressPopup from '../addAddressPopUp/addAddressPopUp';
+import { deleteAddress } from '../../services/userInfo';
 
-const Delivery = ({ onBack, onEdit, onRemove, onSetDefault }) => {
-    const userInfo = useContext(UserContext);
+const Delivery = ({ onBack, onEdit, onSetDefault }) => {
+    let userInfo = useContext(UserContext);
     const addresses = userInfo.Addresses;
 
     const [showAddAddressPopup, setShowAddAddressPopup] = useState(false);
+    const [refetchData, setRefetchData] = useState(true);
+
+    useEffect(() => {
+        // userInfo = useContext(UserContext);
+        console.log(userInfo);
+    }, [refetchData]);
+
+    const onRemove = async(id) => {
+        console.log("onRemove", id);
+        await deleteAddress(id);
+        setRefetchData(!refetchData);
+    };
+
+    const onSave = () => {
+        setShowAddAddressPopup(false);
+        setRefetchData(!refetchData);
+    };
+
     return (
         <div className={styles.container}>
             {/* Header Section */}
@@ -28,7 +47,7 @@ const Delivery = ({ onBack, onEdit, onRemove, onSetDefault }) => {
                             {address.isDefault && <div className={styles.defaultBadge}>Default</div>}
                             <div className={styles.editRemove}>
                                 <span onClick={() => onEdit(index)}>Edit</span>
-                                <span onClick={() => onRemove(index)}>Remove</span>
+                                <span onClick={() => onRemove(address._id)}>Remove</span>
                             </div>
                             {!address.isDefault && (
                                 <button className={styles.paymentButton} onClick={() => onSetDefault(index)}>Set as Default</button>
@@ -39,7 +58,7 @@ const Delivery = ({ onBack, onEdit, onRemove, onSetDefault }) => {
                 {showAddAddressPopup &&
                     <AddAddressPopup 
                         onClose={() => setShowAddAddressPopup(false)}
-                        onSave={() => setShowAddAddressPopup(false)}
+                        onSave={onSave}
                     />
                 }
             </div>
