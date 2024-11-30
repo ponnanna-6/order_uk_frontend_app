@@ -2,7 +2,6 @@ import RatingCard from '../ratingCard/ratingCard'
 import styles from './SummaryCard.module.css'
 
 export default function SummaryCard({restaurantData}) {
-console.log("SUMMARY CARD DATA: ", restaurantData)
     return (
         <section className={styles.container}>
             <div key={restaurantData._id} className={styles.cardPR}>

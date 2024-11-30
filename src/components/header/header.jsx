@@ -1,8 +1,10 @@
 // HomeScreen.js
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './header.module.css';
+import { UserContext } from '../../contexts/userContext';
 
 const Header = () => {
+  const userInfo = useContext(UserContext);
   return (
     <div className={styles.container}>
       {/* Header Section */}
@@ -15,12 +17,15 @@ const Header = () => {
       {/* Header Section */}
       <section className={styles.navBar}>
         <img src="/logo.png" alt="logo" className={styles.logo}/>
-        <button>Home</button>
+        <button onClick={() => window.location.href = '/'}>Home</button>
         <button>Browse Menu</button>
         <button className={styles.active}>Special Offers</button>
         <button>Restaurants</button>
         <button>Track Order</button>
-        <div className={styles.cart}>Login/Register</div>
+        {userInfo?.name 
+          ? <div className={styles.cart}>{userInfo?.name}</div>
+          : <div className={styles.cart} onClick={() => window.location.href = '/login'}>{'Login/Register'}</div>
+        }
       </section>
     </div>
   );

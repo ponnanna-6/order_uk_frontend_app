@@ -12,7 +12,7 @@ export default function Login() {
 
     useEffect(() => {
         if (getIdFromToken()) {
-            // navigate('/')
+            navigate('/')
         }
     }, [])
 

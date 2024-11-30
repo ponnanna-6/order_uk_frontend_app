@@ -1,18 +1,33 @@
 import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import { Register, Login, Home} from './pages'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Register, Login, Home } from './pages'
 import Product from './pages/product/product'
+import { useEffect, useState } from 'react';
+import { getUserInfo } from './services/auth';
+import { UserContext } from './contexts/userContext';
 
 function App() {
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const userInfo = await getUserInfo()
+      setUserInfo(userInfo.data)
+    }
+    getData()
+  }, [])
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/restaurant/:id' element={<Product/>}/>
-      </Routes>
-    </BrowserRouter>
+    <UserContext.Provider value={userInfo}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/restaurant/:id' element={<Product />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   )
 }
 

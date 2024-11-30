@@ -1,0 +1,76 @@
+.foodCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 250px;
+}
+
+.foodHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.foodHeader h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f15b2a;
+}
+
+.foodDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.foodDetails img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.extras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.extra {
+    background-color: #f4f4f4;
+    color: #666;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.addButton {
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .addButton:hover {
+    color: #f15b2a;
+  }
+  
+  .addButton img {
+    width: 20px;
+    height: 20px;
+  }

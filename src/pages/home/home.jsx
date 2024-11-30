@@ -1,17 +1,16 @@
 // HomeScreen.js
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import styles from './home.module.css';
 import food1 from '../../assets/food/food1.png'
 import Header from '../../components/header/header';
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from '@cloudinary/react';
-import { fill } from "@cloudinary/url-gen/actions/resize";
 import Footer from '../../components/footer/footer';
 import { PopularRestaurants } from '../../components/popularRestaurants/popularRestaurants';
 import { Hero2Section } from '../../components/hero2/hero2';
 import FAQ from '../../components/FAQ/FAQ';
 import Stats from '../../components/stats/stats';
-import { getAllRestaurants, getRestaurantById} from '../../services/restaurant';
+import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
 
 const cld = new Cloudinary({
     cloud: {
@@ -52,9 +51,8 @@ const Home = () => {
     ];
 
     useEffect(() => {
-        const getData = async() => {
+        const getData = async () => {
             const restaurantData = await getAllRestaurants()
-            console.log(restaurantData.data)
             setRestaurants(restaurantData.data)
         }
         getData()
@@ -129,7 +127,7 @@ const Home = () => {
             </section>
 
             {/* Popular Categories */}
-            <PopularRestaurants title={"Popular Restaurants"} data={restaurants}/>
+            <PopularRestaurants title={"Popular Restaurants"} data={restaurants} />
 
             {/* Hero 2 Section */}
             <Hero2Section />
@@ -152,10 +150,10 @@ const Home = () => {
             </section>
 
             {/*FAQ*/}
-            <FAQ/>
+            <FAQ />
 
             {/* About Us Section */}
-            <Stats/>
+            <Stats />
 
             {/* Footer Section */}
             <Footer />
