@@ -1,18 +1,21 @@
 import React from 'react';
 import styles from './cart.module.css';
+import { MdDeleteForever } from "react-icons/md";
 
-const Cart = ({ items, total, discounts, deliveryFee }) => {
+const Cart = ({ items, total, discounts, deliveryFee, removeItemFromCart}) => {
+  console.log("CARD: ", items)
   return (
     <div className={styles.cart}>
       <h2 className={styles.title}>My Basket</h2>
       <div className={styles.items}>
-        {items.map((item, index) => (
+        {Object.values(items).map((item, index) => (
           <div key={index} className={styles.item}>
             <div className={styles.itemDetails}>
-              <span className={styles.quantity}>1x</span>
-              <span className={styles.name}>{item.name}</span>
+              <span className={styles.quantity}>{`${item.quantity} x`}</span>
+              <span className={styles.name}>{item.foodInfo.name}</span>
             </div>
-            <span className={styles.price}>£{item.price.toFixed(2)}</span>
+            <span className={styles.price}>£{item.foodInfo.price.toFixed(2)}</span>
+            <MdDeleteForever className={styles.delete} onClick={() => removeItemFromCart(item.foodItem)}/>
           </div>
         ))}
       </div>

@@ -134,3 +134,14 @@
   .checkout:hover {
     background-color: #d64b22;
   }
+
+  .delete {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #f15b2a;
+  }
+  
+  .delete:hover { 
+    font-size: 18px;
+  }

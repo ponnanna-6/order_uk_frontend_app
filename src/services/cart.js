@@ -3,8 +3,8 @@ import { addTokenToHeader, getIdFromToken } from "../helper/utils";
 
 export const getCartById = async () => {
   try {
-    const id = getIdFromToken()
-    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/cart/id/${id}`);
+    const headers = addTokenToHeader({ headers: {} });
+    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/cart/id/`, {headers});
     return {
       status: res?.status,
       data: res?.data
@@ -19,7 +19,6 @@ export const getCartById = async () => {
 
 export const addItemsToCart = async (data) => {
   try {
-    console.log("DATA: ", data)
     const headers = addTokenToHeader({ headers: {} });
     const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/cart/add`, data, { headers });
     return {

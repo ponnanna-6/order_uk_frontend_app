@@ -49,14 +49,15 @@ const Product = () => {
 
         const getCartData = async () => {
             const cartData = await getCartById()
-            setCartData(cartData.data.items)
+            setCartData(cartData.data.cart.items)
+            console.log("cartData.data: ", cartData.data.cart.items)
         }
         window.scrollTo(0, 0);
         getData()
         getCartData()
     }, [])
 
-    const addItemToCart = async(itemId) => {
+    const addItemToCart = async (itemId) => {
         const tempCartData = cartData
         const itemIndex = tempCartData.findIndex((item) => item.foodItem === itemId);
         const foodById = allFoodItems.find((foodItem) => foodItem._id === itemId)
@@ -77,7 +78,22 @@ const Product = () => {
             };
             setCartData([...tempCartData, newItem]);
         }
-        await addItemsToCart({items: tempCartData})
+        await addItemsToCart({ items: tempCartData })
+    };
+
+    const removeItemFromCart = async (itemId) => {
+        const tempCartData = [...cartData];
+        const itemIndex = tempCartData.findIndex((item) => item.foodItem === itemId);
+
+        if (itemIndex !== -1) {
+            if (tempCartData[itemIndex].quantity > 1) {
+                tempCartData[itemIndex].quantity -= 1;
+            } else {
+                tempCartData.splice(itemIndex, 1);
+            }
+            setCartData(tempCartData);
+            await addItemsToCart({ items: tempCartData });
+        }
     };
 
     return (
@@ -112,10 +128,11 @@ const Product = () => {
 
             <div className={styles.cartContainer}>
                 <Cart
-                    items={[]}
+                    items={cartData || []}
                     total={100}
                     discounts={12}
                     deliveryFee={5}
+                    removeItemFromCart={removeItemFromCart}
                 />
             </div>
 
