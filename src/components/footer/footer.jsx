@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Footer.module.css";
+import styles from "./footer.module.css";
 import appStoreImg from "../../assets/app_store.png";
 import playStoreImg from "../../assets/play_store.png";
 
