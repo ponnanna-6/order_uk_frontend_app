@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './addAddressPopup.module.css';
+import styles from './addAddressPopUp.module.css';
 import { addAddress, updateAddress } from '../../services/userInfo';
 
 const AddAddressPopup = ({ onClose, editInfo}) => {
