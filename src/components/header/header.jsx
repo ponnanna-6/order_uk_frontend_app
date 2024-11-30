@@ -11,7 +11,7 @@ const Header = () => {
       <header className={styles.header}>
       <div className={styles.offer}>🌟 Get 5% Off your first order.<span><b>Promo:ORDER5</b></span></div>
         <div className={styles.location}>Regent Street, A5, 42401, London <span>Change Location</span></div>
-        <div className={styles.cart}>My Cart</div>
+        <div className={styles.cart} onClick={() => window.location.href = '/checkout'}>My Cart</div>
       </header>
 
       {/* Header Section */}

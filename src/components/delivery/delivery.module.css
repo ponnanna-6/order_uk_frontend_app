@@ -1,0 +1,149 @@
+/* Delivery Component CSS */
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.orderDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderDetails h2 {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.orderNotes textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    font-size: 16px;
+}
+
+.orderSummary {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deliveryAddress {
+    margin-bottom: 20px;
+}
+
+.deliveryAddress h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.orderInfo {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.orderInfo p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.orderInfo .total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.paymentButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #f4b400;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.paymentButton:hover {
+    background-color: #d39e00;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .orderDetails {
+        flex: 2;
+        margin-right: 20px;
+    }
+
+    .orderSummary {
+        flex: 1;
+    }
+}
+
+/* Card Style */
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.card {
+    width: calc(33.33% - 20px);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.card h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.defaultBadge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #f4b400;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+}
+
+.editRemove {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #f4b400;
+    cursor: pointer;
+}
