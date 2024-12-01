@@ -16,6 +16,7 @@ const Checkout = ({ items }) => {
         const getCartData = async () => {
             const cartData = await getCartById();
             setCartData(cartData.data.cart.items);
+            console.log(cartData.data.cart.items)
         };
 
         getCartData();
@@ -28,7 +29,7 @@ const Checkout = ({ items }) => {
             case "Delivery":
                 return <Delivery onBack={() => setActiveStep("OrderSummary")} />;
             case "Payment":
-                return <Payment onBack={() => setActiveStep("OrderSummary")} />;
+                return <Payment onBack={() => setActiveStep("OrderSummary")} cartData={cartData}/>;
             default:
                 return <OrderSummary cartData={cartData} onNext={() => setActiveStep("Delivery")} />;
         }
