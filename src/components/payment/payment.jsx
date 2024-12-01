@@ -5,7 +5,7 @@ import { deleteItemFromCart } from '../../services/cart';
 import walletIcon from '../../assets/payment/wallet.png'
 import { GrFormNext } from "react-icons/gr";
 import sucessIcon from "../../assets/payment/sucess.png"
-const Payment = ({ onBack, cartData}) => {
+const Payment = ({ onBack, cartData, totalAmount }) => {
     const [paid, setPaid] = useState(false);
 
     const resetCart = async () => {
@@ -67,7 +67,7 @@ const Payment = ({ onBack, cartData}) => {
                 <div className={styles.paymentSummary}>
                     <div className={styles.amount}>
                         <p>Amount to be paid</p>
-                        <p style={{ fontWeight: 'bold', color: '#000' }}>$240</p>
+                        <p style={{ fontWeight: 'bold', color: '#000' }}>{totalAmount}</p>
                     </div>
                     <div className={styles.dividerLine} />
                     <button className={styles.paymentButton} onClick={onPay}>Proceed Payment</button>

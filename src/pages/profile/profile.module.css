@@ -1,23 +1,252 @@
+/* General container styles */
 .container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    font-family: 'Arial', sans-serif;
 }
 
 .profileSummary {
-    width: 300px;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
-    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.profileHeader h2 {
+    font-size: 24px;
+    display: flex;
+    color: #000;
+}
+
+.profileHeader h2 span{
+    cursor: pointer;
+}
+
+.profileDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.profileImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.profileImage img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #fc8a06;
+    object-fit: cover;
+}
+
+.profileInfo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.profileInfo h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.profileInfo p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.editButton,
+.saveButton,
+.cancelButton {
+    background-color: #fc8a06;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.cancelButton {
+    background-color: #999;
+}
+
+.editButton:hover,
+.saveButton:hover,
+.cancelButton:hover {
+    opacity: 0.9;
+}
+
+/* Input styles for edit mode */
+.profileInfo label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.profileInfo div {
+    margin: 10px;
+}
+
+.profileInfo input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Saved Payment Methods */
+.savedPaymentMethods {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.savedPaymentMethods h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.paymentCard {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 240px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.paymentCard img {
+    cursor: pointer;
+}
+
+.paymentCard p {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.paymentMethod {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.cardDetails p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.cardActions {
+    display: flex;
+    gap: 10px;
+}
+
+.editButton {
+    background-color: #4CAF50;
+}
+
+.deleteButton {
+    background-color: #D32F2F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    opacity: 0.8;
+}
+
+/* Add New Card Button */
+.addNewCard button {
+    background-color: #fc8a06;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.addNewCard button:hover {
+    opacity: 0.9;
+}
+
+.dividerLine {
+    height: 1px;
+    width: 100%;
+    background-color: #000;
+    margin: 10px 0;
+    border: none;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .container {
+    .profileDetails {
         flex-direction: column;
+        text-align: center;
     }
 
-    .profileSummary {
-        width: 100%;
+    .profileImage img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profileInfo h3 {
+        font-size: 1.2rem;
+    }
+
+    .profileInfo p {
+        font-size: 0.9rem;
+    }
+
+    .savedPaymentMethods h2 {
+        font-size: 1.3rem;
+    }
+
+    .paymentMethod {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
     }
 }
