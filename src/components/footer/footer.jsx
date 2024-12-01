@@ -40,14 +40,14 @@ const Footer = () => {
 
         <div className={styles.links}>
           <div>
-            <h4>Legal Pages</h4>
+            <h3>Legal Pages</h3>
             <a href="/terms">Terms and conditions</a>
             <a href="/privacy">Privacy</a>
             <a href="/cookies">Cookies</a>
             <a href="/modern-slavery">Modern Slavery Statement</a>
           </div>
           <div>
-            <h4>Important Links</h4>
+            <h3>Important Links</h3>
             <a href="/help">Get help</a>
             <a href="/add-restaurant">Add your restaurant</a>
             <a href="/sign-up">Sign up to deliver</a>
