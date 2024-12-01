@@ -58,3 +58,9 @@
   .operationalTimes p {
     color: #ddd;
   }
+
+  @media (max-width: 768px) {
+    .infoSection {
+      grid-template-columns: 1fr;
+    }
+  }

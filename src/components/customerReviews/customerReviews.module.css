@@ -24,7 +24,16 @@
     scroll-behavior: smooth;
     padding: 10px 0;
     width: 1050px;
+
+    /* Hide scrollbar */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
+
+.reviewsContainer::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+}
+
 
 .reviewCard {
     flex: 0 0 300px;
@@ -80,15 +89,14 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-/* 
-.scrollButtonLeft {
-    left: -20px;
-}
-
-.scrollButtonRight {
-    right: -20px;
-} */
 
 .scrollButtonLeft:hover, .scrollButtonRight:hover {
     background: #d39e00;
+}
+
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 45%;
 }

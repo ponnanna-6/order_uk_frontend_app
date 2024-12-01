@@ -67,7 +67,7 @@ export function CustomerReviews() {
                 </div>
             </div>
             
-            <RatingCard rating={4.5} />
+            <RatingCard rating={4.5} styling={styles.ratingContainer}/>
         </section>
     );
 }
