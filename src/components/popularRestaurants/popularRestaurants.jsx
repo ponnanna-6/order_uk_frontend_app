@@ -3,7 +3,7 @@ import styles from './popularRestaurants.module.css'
 import { getAllRestaurants } from '../../services/restaurant';
 import { useEffect, useState } from 'react';
 
-export function PopularRestaurants() {
+export function PopularRestaurants({title}) {
     
     const [restaurants, setRestaurants] = useState([]);
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ export function PopularRestaurants() {
     }, [])
 
     return (< section className={styles.popularRestaurants} >
-        <h2>Popular Restaurants</h2>
+        <h2>{title ? title : "Similar Restaurants"}</h2>
         <div className={styles.restaurantLogos}>
             {restaurants.map((restaurant, index) => (
                 <div key={index} className={styles.restaurantLogo}>

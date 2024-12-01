@@ -41,12 +41,12 @@ const Delivery = ({ onBack, onSetDefault }) => {
         <div className={styles.container}>
             {/* Header Section */}
             <div className={styles.orderDetails}>
-                <h2><IoMdArrowRoundBack onClick={onBack} /> Your Addresses</h2>
+                <h2><IoMdArrowRoundBack onClick={onBack} style={{ cursor: 'pointer' }}/> Your Addresses</h2>
 
                 {/* Address Cards */}
                 <div className={styles.cardContainer}>
                     <div className={styles.card} onClick={onAdd} style={{ border: '2px dashed #ddd', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
-                        <h4 style={{ fontSize: '20px', color: '#f4b400' }}>+ Add Address</h4>
+                        <h4 style={{ fontSize: '20px', color: '#000' }}>+ Add Address</h4>
                     </div>
                     {addresses.map((address, index) => (
                         <div className={styles.card} key={index}>
@@ -58,9 +58,6 @@ const Delivery = ({ onBack, onSetDefault }) => {
                                 <span onClick={() => onEdit(address)}>Edit</span>
                                 <span onClick={() => onRemove(address._id)}>Remove</span>
                             </div>
-                            {!address.isDefault && (
-                                <button className={styles.paymentButton} onClick={() => onSetDefault(index)}>Set as Default</button>
-                            )}
                         </div>
                     ))}
                 </div>

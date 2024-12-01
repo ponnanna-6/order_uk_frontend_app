@@ -117,7 +117,7 @@ const Home = () => {
             </section>
 
             {/* Popular Categories */}
-            <PopularRestaurants/>
+            <PopularRestaurants title="Popular Restaurants"/>
 
             {/* Hero 2 Section */}
             <Hero2Section />
