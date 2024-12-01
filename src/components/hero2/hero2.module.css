@@ -64,3 +64,20 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+
+@media (max-width: 768px) {
+    .orderingSection {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .orderingSection .textContent {
+        order: 2;
+        margin-top: 2rem;
+    }
+
+    .orderingSection .imageContainer {
+        order: 1;
+    }
+}
