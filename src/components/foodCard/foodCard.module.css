@@ -1,76 +1,76 @@
 .foodCard {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    width: 250px;
-}
-
-.foodHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
-}
-
-.foodHeader h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.price {
+    background: white;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+    margin: 12px;
+    /* max-height: 150px; */
+  }
+  
+  .foodCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .textSection {
+    flex: 2;
+    padding-right: 16px;
+  }
+  
+  .foodName {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    margin: 0 0 8px;
+  }
+  
+  .foodDescription {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 12px;
+  }
+  
+  .price {
     font-size: 16px;
     font-weight: bold;
-    color: #f15b2a;
-}
-
-.foodDetails {
+    color: #222;
+  }
+  
+  .imageSection {
+    flex: 1;
+    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-.foodDetails img {
-    width: 100%;
-    max-height: 150px;
+  }
+  
+  .foodImage {
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 12px;
-}
-
-.extras {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-}
-
-.extra {
-    background-color: #f4f4f4;
-    color: #666;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.addButton {
+    border-radius: 8px;
+  }
+  
+  .addButton {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 32px;
     color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .addButton:hover {
-    color: #f15b2a;
-  }
-  
-  .addButton img {
-    width: 20px;
-    height: 20px;
-  }
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }  

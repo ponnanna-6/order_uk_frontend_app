@@ -101,43 +101,50 @@ const Product = () => {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.parentContainer}>
             {/* Header Section */}
             <Header />
 
             {/* Product Summary */}
             <SummaryCard restaurantData={restaturantById} />
 
-            {/* Food Items */}
-            <div>
-                {Object.keys(fooditems).map((category) => (
-                    <>
-                        <h2>{category}</h2>
-                        <div key={category} className={styles.foodItems}>
-                            {fooditems[category].map((foodItem) => (
-                                <FoodCard
-                                    key={foodItem._id}
-                                    id={foodItem._id}
-                                    name={foodItem.name}
-                                    price={foodItem.price}
-                                    description={foodItem.description}
-                                    img={foodItem.image}
-                                    addItemToCart={addItemToCart}
-                                />
-                            ))}
+            <div className={styles.container}>
+                {/* Food Items Section */}
+                <div className={styles.foodItemsSection}>
+                    {Object.keys(fooditems).map((category) => (
+                        <div key={category} className={styles.categorySection}>
+                            <h2>{category}</h2>
+                            <div className={styles.foodItems}>
+                                {fooditems[category].map((foodItem) => (
+                                    <FoodCard
+                                        key={foodItem._id}
+                                        id={foodItem._id}
+                                        name={foodItem.name}
+                                        price={foodItem.price}
+                                        description={foodItem.description}
+                                        img={foodItem.image}
+                                        addItemToCart={addItemToCart}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </>
-                ))}
+                    ))}
+                </div>
+
+                {/* Cart Section */}
+                <div className={styles.cartContainer}>
+                    {cartData.length > 0 && (
+                        <Cart
+                            items={cartData || []}
+                            discounts={12}
+                            deliveryFee={5}
+                            removeItemFromCart={removeItemFromCart}
+                        />
+                    )}
+                </div>
             </div>
 
-            <div className={styles.cartContainer}>
-                {cartData.length > 0 && <Cart
-                    items={cartData || []}
-                    discounts={12}
-                    deliveryFee={5}
-                    removeItemFromCart={removeItemFromCart}
-                />}
-            </div>
+
 
             {/* Info Section */}
             <InfoSection />
@@ -149,7 +156,7 @@ const Product = () => {
             <CustomerReviews />
 
             {/* Popular Restaurants */}
-            <PopularRestaurants/>
+            <PopularRestaurants />
 
             {/* Footer Section */}
             <Footer />

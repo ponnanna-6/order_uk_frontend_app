@@ -1,4 +1,4 @@
-.container {
+.parentContainer {
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
@@ -13,22 +13,34 @@
     overflow: hidden;
 }
 
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.foodItemsSection {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.categorySection {
+    margin-bottom: 20px;
+}
+
 .foodItems {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
 .cartContainer {
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
-}
-
-.foodItemsContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex: 1;
+    max-width: 350px;
+    position: sticky;
+    top: 10px;
+    align-self: flex-start;
 }
