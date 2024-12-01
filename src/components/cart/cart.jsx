@@ -2,8 +2,9 @@ import React, { useEffect, useMemo } from "react";
 import styles from "./cart.module.css";
 import { MdDeleteForever } from "react-icons/md";
 import cartImg from "../../assets/cart.png";
+import { IoShareSocialOutline } from "react-icons/io5";
 
-const Cart = ({ items, discounts, deliveryFee, removeItemFromCart }) => {
+const Cart = ({ items, discounts, deliveryFee, removeItemFromCart, isPublic, copyLink }) => {
   const total = useMemo(() => {
     return Object.values(items).reduce((acc, item) => {
       return acc + item.foodInfo.price * item.quantity;
@@ -17,6 +18,15 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart }) => {
   return (
     <div className={styles.cart}>
       {/* Title Section */}
+      {!isPublic &&
+        <div className={styles.shareContatiner}>
+          <IoShareSocialOutline className={styles.shareIcon} />
+          <p>Share this cart with your friends</p>
+          <button className={styles.shareCart} onClick={copyLink}>
+            Copy link
+          </button>
+        </div>
+      }
       <div className={styles.titleContainer}>
         <img src={cartImg} alt="cart" className={styles.cartImg} />
         <h2 className={styles.title}>My Basket</h2>
@@ -34,10 +44,10 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart }) => {
             <span className={styles.price}>
               ₹{(item.foodInfo.price * item.quantity).toFixed(2)}
             </span>
-            <MdDeleteForever
+            {!isPublic && <MdDeleteForever
               className={styles.delete}
               onClick={() => removeItemFromCart(item.foodItem)}
-            />
+            />}
           </div>
         ))}
       </div>
@@ -64,9 +74,6 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart }) => {
 
       {/* Actions Section */}
       <div className={styles.actions}>
-        <button className={styles.shareCart}>
-          Share this cart <span>Copy Link</span>
-        </button>
         <button className={styles.freeItem}>Choose your free item</button>
         <div className={styles.couponInput}>
           <input type="text" placeholder="Apply Coupon Code here" />
@@ -79,8 +86,9 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart }) => {
           </button>
         </div>
         <button
-          className={styles.checkout}
+          className={isPublic ? styles.checkoutDisabled : styles.checkout}
           onClick={() => window.location.href = "/checkout"}
+          disabled={isPublic}
         >
           Checkout
         </button>

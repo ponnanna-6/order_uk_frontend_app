@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Register, Login, Home, Checkout, Profile} from './pages'
+import { Register, Login, Home, Checkout, Profile, Share} from './pages'
 import Product from './pages/product/product'
 import { useEffect, useState } from 'react';
 import { getUserInfo } from './services/auth';
@@ -27,6 +27,7 @@ function App() {
           <Route path='/restaurant/:id' element={<Product />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/share/:id' element={<Share />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

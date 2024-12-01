@@ -48,3 +48,18 @@ export const deleteItemFromCart = async (id) => {
     };
   }
 };
+
+export const shareCartData = async (id) => {
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/cart/public/${id}`);
+    return {
+      status: res?.status,
+      data: res?.data
+    };
+  } catch (error) {
+    return {
+      status: error?.status ? error.status : 500,
+      message: error?.response?.data?.message ? error.response.data.message : "Something went wrong"
+    };
+  }
+};

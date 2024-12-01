@@ -23,6 +23,7 @@ const Product = () => {
     const [cartData, setCartData] = useState([])
     const [allFoodItems, setAllFoodItems] = useState([])
     const [shouldRefetchCart, setShouldRefetchCart] = useState(false);
+    const [cartId, setCartId] = useState(null);
 
     const { id } = useParams();
     const position = [51.505, -0.09];
@@ -54,6 +55,7 @@ const Product = () => {
         const getCartData = async () => {
             const cartData = await getCartById();
             setCartData(cartData.data.cart.items);
+            setCartId(cartData.data.cart._id);
         };
 
         getCartData();
@@ -100,6 +102,11 @@ const Product = () => {
         setShouldRefetchCart(!shouldRefetchCart)
     };
 
+    const copyLink = async () => {
+        await navigator.clipboard.writeText(`${window.location.origin}/share/${cartId}`);
+        alert("Link copied to clipboard!")
+    }
+
     return (
         <div className={styles.parentContainer}>
             {/* Header Section */}
@@ -139,6 +146,7 @@ const Product = () => {
                             discounts={12}
                             deliveryFee={5}
                             removeItemFromCart={removeItemFromCart}
+                            copyLink={copyLink}
                         />
                     )}
                 </div>
