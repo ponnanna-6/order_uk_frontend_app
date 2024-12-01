@@ -35,7 +35,6 @@ export default function Form ({formFields, errorMessages, error, onSubmit, butto
             {formFields.map((item, index) => 
                 <>
                     <div key={index} className={styles.inputContainer}>
-                        {getIcon(item?.name)}
                         <input 
                             value={item?.value}
                             type={item?.name === "password" && showPassword 

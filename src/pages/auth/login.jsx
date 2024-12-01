@@ -46,7 +46,7 @@ export default function Login() {
     const formFields = [
         {
             name: "email",
-            placeholder: "Email",
+            placeholder: "Example@gmail.com",
             type: "email",
             value: formData?.email,
             onChange: (e) => {
@@ -56,7 +56,7 @@ export default function Login() {
         },
         {
             name: "password",
-            placeholder: "Password",
+            placeholder: "Atleast 8 characters",
             type: "password",
             value: formData?.password,
             showPassword: false,
@@ -96,7 +96,7 @@ export default function Login() {
             <div className={styles.container}>
                 <div className={styles.container2}>
                     <img src='./logo.png' alt='logo' className={styles.logo} />
-                    <p className={styles.headerText}>Welcome  👋</p>
+                    <p className={styles.headerText}>Welcome Back</p>
                     <p>Today is a new day. It's your day. You shape it. 
                     Sign in to start ordering.</p>
                     <Form
@@ -106,8 +106,13 @@ export default function Login() {
                         onSubmit={onSubmit}
                         buttonText={"Login"}
                     />
-                    <p className={styles.lightText}>Have no account yet ?</p>
-                    <button className={styles.buttonStyle} onClick={() => navigate('/register')}>Register</button>
+                    <p className={styles.lightText}>
+                        Have no account yet ?&nbsp;
+                        <span 
+                            className={styles.buttonStyle}
+                            onClick={() => navigate('/register')}>Sign Up
+                        </span>
+                    </p>
                 </div>
                 <div className={styles.container1}>
                     <img src={foodImg} alt='food image' className={styles.imageStyle} />

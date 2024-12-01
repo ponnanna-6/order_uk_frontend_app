@@ -26,7 +26,7 @@ export default function Register() {
     const formFields = [
         {
             name: "name",
-            placeholder: "Name",
+            placeholder: "eg. John A",
             type: "text",
             value: formData?.name,
             onChange: (e) => {
@@ -48,7 +48,7 @@ export default function Register() {
         },
         {
             name: "email",
-            placeholder: "Email",
+            placeholder: "Example@email.com",
             type: "email",
             value: formData?.email,
             onChange: (e) => {
@@ -58,7 +58,7 @@ export default function Register() {
         },
         {
             name: "password",
-            placeholder: "Password",
+            placeholder: "At least 8 characters",
             type: "password",
             value: formData?.password,
             showPassword: false,
@@ -127,7 +127,7 @@ export default function Register() {
             <div className={styles.container}>
                 <div className={styles.container2}>
                     <img src='./logo.png' alt='logo' className={styles.logo} />
-                    <p className={styles.headerText}>Welcome  👋</p>
+                    <p className={styles.headerText}>Welcome</p>
                     <p>Today is a new day. It's your day. You shape it.
                         Sign up to start ordering.</p>
                     <Form
@@ -137,8 +137,13 @@ export default function Register() {
                         onSubmit={onSubmit}
                         buttonText={"Register"}
                     />
-                    <p className={styles.lightText}>Have an account ?</p>
-                    <button className={styles.buttonStyle} onClick={() => navigate('/login')}>Login</button>
+                    <p className={styles.lightText}>
+                        Have an account ?&nbsp;
+                        <span 
+                            className={styles.buttonStyle}
+                            onClick={() => navigate('/login')}>Sign In
+                        </span>
+                    </p>
                 </div>
                 <div className={styles.container1}>
                     <img src={foodImg} alt='food image' className={styles.imageStyle} />
