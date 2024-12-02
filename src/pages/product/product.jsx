@@ -25,8 +25,23 @@ const Product = () => {
     const [shouldRefetchCart, setShouldRefetchCart] = useState(false);
     const [cartId, setCartId] = useState(null);
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
     const { id } = useParams();
-    const position = [51.505, -0.09];
+    const offerCards = [
+        {
+            id: 1,
+            image: "https://res.cloudinary.com/dgs9nsrid/image/upload/v1733174120/cuvette-food-app/Product%20page/iiq4ayzjbaqcgxag5lm2.png"
+        },
+        {
+            id: 2,
+            image: "https://res.cloudinary.com/dgs9nsrid/image/upload/v1733174121/cuvette-food-app/Product%20page/i58o0xmarpfzcwm9pwhf.png"
+        },
+        {
+            id: 3,
+            image: "https://res.cloudinary.com/dgs9nsrid/image/upload/v1733174121/cuvette-food-app/Product%20page/juh5xz06gqfj7hwhvbyx.png"
+        }
+    ]
 
     useEffect(() => {
         const getData = async () => {
@@ -60,6 +75,15 @@ const Product = () => {
 
         getCartData();
     }, [shouldRefetchCart]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const addItemToCart = async (itemId) => {
         const tempCartData = cartData
@@ -107,6 +131,11 @@ const Product = () => {
         alert("Link copied to clipboard!")
     }
 
+    function capitalizeFirstLetter(string) {
+        if (!string) return "";
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     return (
         <div className={styles.parentContainer}>
             {/* Header Section */}
@@ -115,12 +144,21 @@ const Product = () => {
             {/* Product Summary */}
             <SummaryCard restaurantData={restaturantById} />
 
+            <div className={styles.offerContainer}>
+                {offerCards.map((card) => (
+                    <div key={card.id} className={styles.offerCard}>
+                        <img src={card.image} alt="offer" />
+                    </div>
+                ))}
+
+            </div>
+
             <div className={styles.container}>
                 {/* Food Items Section */}
                 <div className={styles.foodItemsSection}>
                     {Object.keys(fooditems).map((category) => (
                         <div key={category} className={styles.categorySection}>
-                            <h2>{category}</h2>
+                            <h2>{capitalizeFirstLetter(category)}</h2>
                             <div className={styles.foodItems}>
                                 {fooditems[category].map((foodItem) => (
                                     <FoodCard
@@ -139,7 +177,7 @@ const Product = () => {
                 </div>
 
                 {/* Cart Section */}
-                <div className={styles.cartContainer}>
+                {!isMobile && <div className={styles.cartContainer}>
                     {cartData.length > 0 && (
                         <Cart
                             items={cartData || []}
@@ -149,16 +187,14 @@ const Product = () => {
                             copyLink={copyLink}
                         />
                     )}
-                </div>
+                </div>}
             </div>
 
-
-
             {/* Info Section */}
-            <InfoSection />
+            {!isMobile && <InfoSection />}
 
             {/* Map */}
-            <MapWithInfoCard restaurantData={restaturantById}/>
+            <MapWithInfoCard restaurantData={restaturantById} />
 
             {/* Customer Reviews */}
             <CustomerReviews />

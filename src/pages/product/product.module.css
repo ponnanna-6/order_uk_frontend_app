@@ -44,3 +44,49 @@
     top: 10px;
     align-self: flex-start;
 }
+
+.offerContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 30px;
+}
+.offerCard {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.offerCard img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .foodItemsSection {
+        flex: 1;
+    }
+
+    .cartContainer {
+        margin-top: 20px;
+    }
+
+    .offerContainer {
+        display: none;
+    }
+
+    .foodItems {
+        grid-template-columns: 1fr;
+    }
+}

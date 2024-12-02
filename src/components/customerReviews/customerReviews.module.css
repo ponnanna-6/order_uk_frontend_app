@@ -100,3 +100,13 @@
     gap: 5px;
     margin-left: 45%;
 }
+
+@media (max-width: 768px) {
+    .reviewsContainer {
+        width: 100%;
+    }
+
+    .reviewCard {
+        flex: 0 0 90%;
+    }
+}
