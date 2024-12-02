@@ -6,12 +6,19 @@ import { FaCircleUser } from "react-icons/fa6";
 import cartImg from '../../assets/cart.png'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { getUserInfo } from '../../services/auth';
+import { NavLink, useLocation } from "react-router-dom";
 
-const Header = ({hideCart}) => {
+const Header = ({ hideCart }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const location = useLocation();
 
-  
+  const currentPath = window.location.pathname;
+
+  const handleNavigation = (path) => {
+    window.location.href = path;
+  };
+
   useEffect(() => {
     const getData = async () => {
       const userInfo = await getUserInfo()
@@ -29,6 +36,55 @@ const Header = ({hideCart}) => {
     return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
 
+  const renderNavBar = () => {
+    return (
+      !isMobile && (
+        <section className={styles.navBar}>
+          <img src="/logo.png" alt="logo" className={styles.logo} />
+          <button
+            onClick={() => handleNavigation('/')}
+            className={currentPath === '/' ? styles.active : ''}
+          >
+            Home
+          </button>
+          <button>
+            Browse Menu
+          </button>
+          <button>
+            Special Offers
+          </button>
+          <button>
+            Restaurants
+          </button>
+          <button>
+            Track Order
+          </button>
+          {userInfo?.name ? (
+            <div
+              className={styles.profile}
+              onClick={() => handleNavigation('/profile')}
+            >
+              <span>
+                <FaCircleUser className={styles.icon} />
+              </span>
+              &nbsp;Hey, {userInfo?.name}
+            </div>
+          ) : (
+            <div
+              className={styles.profile}
+              onClick={() => handleNavigation('/login')}
+            >
+              <span>
+                <FaCircleUser className={styles.icon} />
+              </span>
+              &nbsp;Login/Signup
+            </div>
+          )}
+        </section>
+      )
+    );
+  }
+
   return (
     <div className={styles.container}>
       {/* Header Section */}
@@ -42,18 +98,7 @@ const Header = ({hideCart}) => {
       </header>}
 
       {/* Header Section */}
-      {!isMobile && <section className={styles.navBar}>
-        <img src="/logo.png" alt="logo" className={styles.logo} />
-        <button onClick={() => window.location.href = '/'}>Home</button>
-        <button>Browse Menu</button>
-        <button className={styles.active}>Special Offers</button>
-        <button>Restaurants</button>
-        <button>Track Order</button>
-        {userInfo?.name
-          ? <div className={styles.profile} onClick={() => window.location.href = '/profile'}><span><FaCircleUser className={styles.icon} /></span>&nbsp;Hey, {userInfo?.name}</div>
-          : <div className={styles.profile} onClick={() => window.location.href = '/login'}><span><FaCircleUser className={styles.icon} /></span>&nbsp;{'Login/Signup'}</div>
-        }
-      </section>}
+      {!isMobile && <>{renderNavBar()}</>}
 
       {isMobile && <section className={styles.navBarMobile}>
         <div className={styles.mobileHeader1}>

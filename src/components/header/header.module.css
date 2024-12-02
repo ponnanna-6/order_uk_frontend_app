@@ -121,6 +121,11 @@
   color: #000;
 }
 
+.active {
+  background-color: #FC8A06;
+  color: #000;
+}
+
 /* Mobile view css */
 
 .navBarMobile {
