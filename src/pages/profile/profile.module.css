@@ -19,6 +19,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .profileHeader h2 {
@@ -27,7 +28,7 @@
     color: #000;
 }
 
-.profileHeader h2 span{
+.profileHeader h2 span {
     cursor: pointer;
 }
 
@@ -35,10 +36,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     width: 100%;
-    padding: 20px;
 }
 
 .profileImage {
@@ -49,22 +49,32 @@
     width: 90%;
 }
 
+.profileImage div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
 .profileImage img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #fc8a06;
     object-fit: cover;
+}
+
+.profileImage h3 {
+    font-size: 1.5rem;
+    margin: 0;
 }
 
 .profileInfo {
     display: grid;
     grid-template-columns: repeat(2, minmax(250px, 1fr));
     gap: 20px;
-    padding: 20px;
     border-radius: 8px;
     justify-content: space-between;
-    width: 90%;
+    width: 95%;
 }
 
 .profileInfo label {
@@ -72,12 +82,10 @@
     color: #000;
 }
 
-.editButton,
-.saveButton,
-.cancelButton {
+.saveButton {
     background-color: #fc8a06;
     color: white;
-    padding: 8px 12px;
+    padding: 8px 24px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -85,22 +93,18 @@
     margin-top: 10px;
 }
 
-.cancelButton {
-    background-color: #999;
-}
-
-.editButton:hover,
-.saveButton:hover,
-.cancelButton:hover {
-    opacity: 0.9;
+.saveButton:hover {
+    opacity: 0.8;
 }
 
 /* Input styles for edit mode */
 .profileInfo label {
     display: block;
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: 500;
     color: #444;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .profileInfo div {
@@ -109,17 +113,19 @@
 
 .profileInfo input {
     width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
+    padding: 12px 16px;
+    border: 0.5px solid #ddd;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 16px;
+    color: #000;
 }
 
-/* Saved Payment Methods */
 .savedPaymentMethods {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px 30px;
+    margin-bottom: 20px;
 }
 
 .savedPaymentMethods h2 {
@@ -132,7 +138,7 @@
     display: flex;
     flex-direction: row;
     height: 60px;
-    width: 240px;
+    width: 300px;
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 10px;
@@ -149,6 +155,38 @@
     color: #000;
     font-size: 16px;
     font-weight: 500;
+    white-space: nowrap;
+}
+
+.paymentCard span {
+    opacity: 0.5;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.addCard {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.addCard:hover {
+    background-color: #f9f9f9;
+}
+
+.addCard p {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .paymentMethod {
@@ -205,36 +243,38 @@
     opacity: 0.9;
 }
 
+.paymentHeader {
+    padding: 0px 20px 0 30px;
+}
+
 .dividerLine {
     height: 1px;
     width: 100%;
     background-color: #000;
-    margin: 10px 0;
+    margin: 30px 20px 0px 10px;
     border: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .profileDetails {
+    .profileInfo {
+        display: flex;
         flex-direction: column;
-        text-align: center;
+        gap: 0px;
     }
 
-    .profileImage img {
-        width: 100px;
-        height: 100px;
+    .savedPaymentMethods {
+        display: flex;
+        flex-direction: column;
     }
 
-    .profileInfo h3 {
-        font-size: 1.2rem;
+    .paymentCard {
+        width: 100%;
     }
 
-    .profileInfo p {
-        font-size: 0.9rem;
-    }
-
-    .savedPaymentMethods h2 {
-        font-size: 1.3rem;
+    .addCard {
+        width: 100%;
+        justify-content: flex-start;
     }
 
     .paymentMethod {

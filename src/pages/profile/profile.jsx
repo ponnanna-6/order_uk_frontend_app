@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './profile.module.css';
-import { UserContext } from '../../contexts/userContext';
 import Header from '../../components/header/header';
-import { PopularRestaurants } from '../../components/popularRestaurants/popularRestaurants';
 import Footer from '../../components/footer/footer';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import addIcon from '../../assets/payment/add.png'
-import walletIcon from '../../assets/payment/wallet.png'
+import walletIcon from '../../assets/payment/wallet2.png'
 import editIcon from '../../assets/payment/edit.png'
 import { getUserInfo } from '../../services/auth';
 import { addPaymentMethod, removePaymentMethod, updateUserInfo } from '../../services/userInfo';
 import AddPaymentPopUp from '../../components/addPaymentPopUp/addPaymentPopUp';
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -23,10 +22,20 @@ const Profile = () => {
     });
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardDetails, setCardDetails] = useState({});
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     useEffect(() => {
         getData()
     }, [])
+
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
+    
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
 
     const getData = async () => {
         const userInfo = await getUserInfo()
@@ -99,41 +108,52 @@ const Profile = () => {
         setCardDetails({});
     };
 
+    const renderSaveEditButton = () => {
+        if (isEditing) {
+            return (
+                <button onClick={handleSave} className={styles.saveButton}>
+                    Save
+                </button>
+            );
+        } else {
+            return (
+                <button onClick={() => setIsEditing(true)} className={styles.saveButton}>
+                    Edit
+                </button>
+            );
+        }
+    };
+
     const renderComponent = () => {
         return (
             <div className={styles.container}>
                 <div className={styles.profileSummary}>
                     <div className={styles.profileHeader}>
-                        <h2><span><IoMdArrowRoundBack onClick={() => window.history.back()} /></span>My Profile</h2>
+                        {isMobile 
+                            ?   <div style={{ display: 'flex', width: '100%',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <h2>
+                                        <span><IoArrowBackCircleSharp style={{fontSize: '50px'}} color='#FC8A06' onClick={() => window.history.back()} /></span>
+                                        My Profile
+                                    </h2>
+                                    {renderSaveEditButton()}
+                                </div>
+                            : <h2><span><IoMdArrowRoundBack onClick={() => window.history.back()} /></span>My Profile</h2>
+                        }
                     </div>
                     <div className={styles.profileDetails}>
-                        <div className={styles.profileImage}>
+                        {!isMobile && <div className={styles.profileImage}>
                             <div>
                                 <img
-                                    src="https://res.cloudinary.com/dgs9nsrid/image/upload/v1732995381/cuvette-food-app/ws1ndpspih7p73nckcms.png"
+                                    src="https://res.cloudinary.com/dgs9nsrid/image/upload/v1733161147/cuvette-food-app/ix9qyezc0rm2jvlhnnyp.jpg"
                                     alt="Profile"
                                 />
                                 <h3>{editableInfo.name}</h3>
                             </div>
-                            {isEditing ? (
-                                <button
-                                    onClick={handleSave}
-                                    className={styles.saveButton}
-                                >
-                                    Save
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => setIsEditing(true)}
-                                    className={styles.saveButton}
-                                >
-                                    Edit
-                                </button>
-                            )}
-                        </div>
+                            {renderSaveEditButton()}
+                        </div>}
                         <div className={styles.profileInfo}>
                             <div>
-                                <label>Full Name:</label>
+                                <label>Full Name</label>
                                 <input
                                     type="text"
                                     name="name"
@@ -142,9 +162,8 @@ const Profile = () => {
                                     disabled={!isEditing}
                                 />
                             </div>
-
                             <div>
-                                <label>Email Address:</label>
+                                <label>Email Address</label>
                                 <input
                                     type="email"
                                     name="email"
@@ -154,7 +173,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div>
-                                <label>Gender:</label>
+                                <label>Gender</label>
                                 <input
                                     type="text"
                                     name="gender"
@@ -164,7 +183,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div>
-                                <label>Country:</label>
+                                <label>Country</label>
                                 <input
                                     type="text"
                                     name="country"
@@ -175,20 +194,19 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
+                    <div className={styles.dividerLine}></div>
                 </div>
-                <div className={styles.dividerLine}></div>
-                <h2>Saved Payment Methods</h2>
+                <h2 className={styles.paymentHeader}>Saved Payment Methods</h2>
                 <div className={styles.savedPaymentMethods}>
                     {userInfo?.paymentMethods?.map((method) => (
                         <div className={styles.paymentCard}>
                             <img src={walletIcon} alt="wallet" />
-                            <p>{method?.cardNumber}<br></br><span>{method?.name}</span></p>
+                            <p>XXXX XXXX XXXX {method?.cardNumber.slice(-4)}<br></br><span>{method?.name}</span></p>
                             <img src={editIcon} alt="edit" onClick={() => onEditClick(method)} />
                         </div>
                     ))}
                     <div
-                        className={styles.paymentCard}
-                        style={{ justifyContent: 'center' }}
+                        className={styles.addCard}
                         onClick={onAddClick}
                     >
                         <img src={addIcon} alt="add" />
@@ -210,10 +228,9 @@ const Profile = () => {
 
     return (
         <div className={styles.parentContainer}>
-            <Header />
+            <Header hideCart={true} />
             {renderComponent()}
-            <PopularRestaurants />
-            <Footer />
+            {!isMobile && <Footer />}
         </div>
     );
 };

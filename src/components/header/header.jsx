@@ -7,7 +7,7 @@ import cartImg from '../../assets/cart.png'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { getUserInfo } from '../../services/auth';
 
-const Header = () => {
+const Header = ({hideCart}) => {
   const [userInfo, setUserInfo] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -61,7 +61,7 @@ const Header = () => {
           <GiHamburgerMenu className={styles.hamburger} onClick={() => window.location.href = '/'} />
         </div>
 
-        <div className={styles.mobileHeader2}>
+        {!hideCart && <div className={styles.mobileHeader2}>
           {userInfo?.name
             ? <div className={styles.profileMobile} onClick={() => window.location.href = '/profile'}><span><FaCircleUser className={styles.icon} /></span>&nbsp;Hey {userInfo?.name}</div>
             : <div className={styles.profileMobile} onClick={() => window.location.href = '/login'}><span><FaCircleUser className={styles.icon} /></span>&nbsp;{'Login/Signup'}</div>
@@ -70,7 +70,7 @@ const Header = () => {
             <span><img src={cartImg} alt="cart" className={styles.cartIcon} /></span>&nbsp;
             My Cart
           </div>
-        </div>
+        </div>}
       </section>}
     </div>
   );
