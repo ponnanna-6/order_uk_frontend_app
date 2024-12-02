@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './addAddressPopUp.module.css';
 import { addAddress, updateAddress } from '../../services/userInfo';
 
-const AddAddressPopup = ({ onClose, editInfo}) => {
+const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
     const [pinCode, setPinCode] = useState('');
@@ -29,10 +29,11 @@ const AddAddressPopup = ({ onClose, editInfo}) => {
             res = await addAddress(address)
         }
         if (res.status == 200) {
+            alert(res.message)
+            onSave();
             onClose();
         }
         onClose();
-        console.log(res)
     };
 
     return (

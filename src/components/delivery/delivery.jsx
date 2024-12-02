@@ -35,7 +35,12 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
     }
 
     const onRemove = async(id) => {
-        await deleteAddress(id);
+        const res = await deleteAddress(id);
+        if(res.status === 200) {
+            alert(res.message);
+        } else {
+            alert("Something went wrong");
+        }
         setRefetchData(!refetchData);
     };
 
