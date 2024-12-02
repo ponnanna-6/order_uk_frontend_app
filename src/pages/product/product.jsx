@@ -158,7 +158,7 @@ const Product = () => {
             <InfoSection />
 
             {/* Map */}
-            <MapWithInfoCard />
+            <MapWithInfoCard restaurantData={restaturantById}/>
 
             {/* Customer Reviews */}
             <CustomerReviews />

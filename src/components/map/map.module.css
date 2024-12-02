@@ -7,13 +7,15 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    margin-left: 30px;
   }
   
   .infoCard {
     position: absolute;
     top: 50px;
     left: 50px;
-    background: #001333; /* Dark blue background */
+    background: #03081F; /* Dark blue background */
     color: white;
     padding: 20px;
     border-radius: 8px;
@@ -23,21 +25,39 @@
   }
   
   .infoCard h2 {
+    color: white;
     margin: 0;
     font-size: 1.5em;
+    padding: 5px;
   }
   
   .infoCard h3 {
-    margin: 5px 0 10px;
-    color: #ffa500; /* Orange color for subheading */
+    color: #FC8A06;
+    margin: 0;
+    padding: 5px;
+    font-size: 1.2em;
+    text-align: left;
+  }  
+  
+  .infoCard span {
+    color: #FC8A06;
+    margin: 0;
   }
   
+  
   .infoCard p {
+    color: white;
     margin: 10px 0;
+    padding: 5px;
+  }
+
+  .infoCard strong {
+    color: white;
+    font-weight: bold;
   }
   
   .infoCard a {
-    color: #ffa500; /* Orange link color */
+    color: #FC8A06;
     text-decoration: none;
   }
   

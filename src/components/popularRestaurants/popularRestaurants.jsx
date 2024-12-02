@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './popularRestaurants.module.css'
 import { getAllRestaurants } from '../../services/restaurant';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,12 @@ export function PopularRestaurants({title}) {
         getData()
     }, [])
 
+    function onClick(restaurantId) {
+        navigate("/restaurant/" + restaurantId)
+        window.location.reload();
+        window.scrollTo(0, 0);
+    }
+
     return (< section className={styles.popularRestaurants} >
         <h2>{title ? title : "Similar Restaurants"}</h2>
         <div className={styles.restaurantLogos}>
@@ -25,7 +31,7 @@ export function PopularRestaurants({title}) {
                         src={restaurant.logo}
                         alt={"restaturant logo"}
                         className={styles.restaurantLogoImg}
-                        onClick={() => navigate("/restaurant/" + restaurant._id)}
+                        onClick={() => onClick(restaurant._id)}
                     />
                 </div>
             ))}

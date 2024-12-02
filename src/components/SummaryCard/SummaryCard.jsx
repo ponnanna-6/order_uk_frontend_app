@@ -9,7 +9,7 @@ export default function SummaryCard({ restaurantData }) {
             <div
                 key={restaurantData._id}
                 className={styles.cardPR}
-                style={{ backgroundImage: `url(${restaurantData.bgImg})` }}
+                style={{ backgroundImage: `url(https://res.cloudinary.com/dgs9nsrid/image/upload/v1732876060/cuvette-food-app/Popular%20restaurants/prb6g47zedtr9iuy1tyt.png)` }}
             >
                 <div className={styles.imageContainer}>
                     <div className={styles.content}>
@@ -22,7 +22,7 @@ export default function SummaryCard({ restaurantData }) {
                     </div>
                 </div>
                 <div className={styles.cardImg}>
-                    <img src={restaurantData.logo} alt={restaurantData.title} />
+                    <img src={restaurantData.bgImg} alt={restaurantData.title} />
                     <RatingCard rating={restaurantData.rating} styling={styles.ratingCard} />
                 </div>
                 <div className={styles.openInfo}>

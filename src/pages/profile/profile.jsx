@@ -73,7 +73,7 @@ const Profile = () => {
                         </div>
                         <div className={styles.profileInfo}>
                             <div>
-                                <label>Name:</label>
+                                <label>Full Name:</label>
                                 <input
                                     type="text"
                                     name="name"
@@ -84,7 +84,7 @@ const Profile = () => {
                             </div>
 
                             <div>
-                                <label>Email:</label>
+                                <label>Email Address:</label>
                                 <input
                                     type="email"
                                     name="email"
