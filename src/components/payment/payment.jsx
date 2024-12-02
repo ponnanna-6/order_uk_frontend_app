@@ -5,8 +5,24 @@ import { deleteItemFromCart } from '../../services/cart';
 import walletIcon from '../../assets/payment/wallet.png'
 import { GrFormNext } from "react-icons/gr";
 import sucessIcon from "../../assets/payment/sucess.png"
-const Payment = ({ onBack, cartData, totalAmount }) => {
+import { IoArrowBackCircleSharp } from "react-icons/io5";
+const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
     const [paid, setPaid] = useState(false);
+
+    const renderHeader = () => {
+        if (isMobile) {
+            return (
+                <div style={{ display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <h2>
+                        <span><IoArrowBackCircleSharp style={{ fontSize: '50px' }} color='#FC8A06' onClick={onBack} /></span>
+                        Choose and Pay
+                    </h2>
+                </div>
+            );
+        } else {
+            return <h2><span><IoMdArrowRoundBack onClick={onBack} /></span>Choose and Pay</h2>;
+        }
+    }
 
     const resetCart = async () => {
         await deleteItemFromCart();
@@ -23,7 +39,7 @@ const Payment = ({ onBack, cartData, totalAmount }) => {
         <div className={styles.container}>
             {!paid && <>
                 <div className={styles.paymentMethods}>
-                    <h2><span><IoMdArrowRoundBack onClick={onBack} /></span>Choose and pay</h2>
+                    {renderHeader()}
                     <div className={styles.paymentOptions}>
                         <div className={styles.paymentOptionDiv}>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>

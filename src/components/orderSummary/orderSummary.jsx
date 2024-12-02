@@ -2,14 +2,30 @@ import styles from './orderSummary.module.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GrFormNext } from "react-icons/gr";
 import { FaLocationDot } from "react-icons/fa6";
-const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount}) => {
+import { IoArrowBackCircleSharp } from "react-icons/io5";
+const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, isMobile }) => {
+
+    const renderHeader = () => {
+        if (isMobile) {
+            return (
+                <div style={{ display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <h2>
+                        <span><IoArrowBackCircleSharp style={{ fontSize: '50px' }} color='#FC8A06' onClick={() => window.history.back()} /></span>
+                        Checkout
+                    </h2>
+                </div>
+            );
+        } else {
+            return <h2><span><IoMdArrowRoundBack onClick={() => window.history.back()} /></span>Your Order Details</h2>;
+        }
+    }
 
     return (
         <>
             {cartData.length > 0 ? (
                 <div className={styles.container}>
                     <div className={styles.orderDetails}>
-                        <h2><span><IoMdArrowRoundBack onClick={() => window.history.back()} /></span>Your Order Details</h2>
+                        {renderHeader()}
                         <div className={styles.divider}>
                             {cartData.map((item, index) => (
                                 <div key={index} className={styles.itemContainer} style={index === cartData.length - 1 ? { borderBottom: "none" } : null}>
@@ -31,6 +47,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount})
                         </div>
                     </div>
                     <div className={styles.orderSummary}>
+                        {isMobile && <h2>Delivery Address</h2>}
                         <div className={styles.deliveryAddress} onClick={onClickDelivery}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 <div className={styles.locationIcon}>
@@ -43,8 +60,9 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount})
                             </div>
                             <GrFormNext color='#FC8A06' style={{ fontSize: "2.5rem" }} />
                         </div>
-                        <div className={styles.dividerLine}></div>
+                        {!isMobile && <div className={styles.dividerLine}></div>}
 
+                        {isMobile && <h2>Order Summary</h2>}
                         <div className={styles.orderInfo}>
                             <div className={styles.orderSummaryItems}>
                                 <p>Items</p>
@@ -54,12 +72,14 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount})
                                 <p>Sales Tax</p>
                                 <p>$10</p>
                             </div>
-                            <div className={styles.dividerLine}></div>
+                            {!isMobile && <div className={styles.dividerLine}></div>}
 
                             <div className={styles.orderSummaryItems}>
                                 <h4>{`Subtotal (${cartData.length} items)`}</h4>
                                 <h4>${totalAmount + 10}</h4>
                             </div>
+                            
+                            {isMobile && <div className={styles.dividerLine}></div>}
                         </div>
                         <button className={styles.paymentButton} onClick={onClickPayment}>Choose Payment Method</button>
                     </div>
@@ -67,7 +87,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount})
             ) : (
                 <div className={styles.container}>
                     <div className={styles.orderDetails}>
-                        <h2><span><IoMdArrowRoundBack onClick={() => window.history.back()} /></span>Your Order Details</h2>
+                        {renderHeader()}
                         <h3>Your cart is empty</h3>
                     </div>
                 </div>

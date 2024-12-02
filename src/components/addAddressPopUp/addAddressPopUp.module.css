@@ -105,3 +105,23 @@ textarea {
 .cancelButton:hover {
     background-color: #e0e0e0;
 }
+
+@media (max-width: 768px) {
+    .popupContent {
+        height: 80%;
+        overflow-y: auto;
+    }
+    .inputRow {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .inputGroup label {
+        display: none;
+    }
+    .inputGroupFullWidth {
+        height: 100px;
+    }
+    .inputGroupFullWidth label {
+        display: none;
+    }
+}
