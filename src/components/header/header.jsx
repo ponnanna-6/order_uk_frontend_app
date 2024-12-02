@@ -5,10 +5,20 @@ import { UserContext } from '../../contexts/userContext';
 import { FaCircleUser } from "react-icons/fa6";
 import cartImg from '../../assets/cart.png'
 import { GiHamburgerMenu } from "react-icons/gi";
+import { getUserInfo } from '../../services/auth';
 
 const Header = () => {
-  const userInfo = useContext(UserContext);
+  const [userInfo, setUserInfo] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  
+  useEffect(() => {
+    const getData = async () => {
+      const userInfo = await getUserInfo()
+      setUserInfo(userInfo.data)
+    }
+    getData()
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {

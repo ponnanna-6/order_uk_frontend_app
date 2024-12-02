@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './profile.module.css';
 import { UserContext } from '../../contexts/userContext';
 import Header from '../../components/header/header';
@@ -8,21 +8,58 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import addIcon from '../../assets/payment/add.png'
 import walletIcon from '../../assets/payment/wallet.png'
 import editIcon from '../../assets/payment/edit.png'
+import { getUserInfo } from '../../services/auth';
+import { addPaymentMethod, removePaymentMethod, updateUserInfo } from '../../services/userInfo';
+import AddPaymentPopUp from '../../components/addPaymentPopUp/addPaymentPopUp';
 
 const Profile = () => {
-    const userInfo = useContext(UserContext);
-
-    // State to toggle edit mode
+    const [userInfo, setUserInfo] = useState({});
     const [isEditing, setIsEditing] = useState(false);
-
-    // State to store updated user details
     const [editableInfo, setEditableInfo] = useState({
         name: userInfo?.name || '',
         gender: userInfo?.gender || '',
         country: userInfo?.country || '',
         email: userInfo?.email || '',
     });
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [cardDetails, setCardDetails] = useState({});
 
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const getData = async () => {
+        const userInfo = await getUserInfo()
+        setUserInfo(userInfo.data)
+        setEditableInfo({
+            name: userInfo?.data.name || '',
+            gender: userInfo?.data.gender || '',
+            country: userInfo?.data.country || '',
+            email: userInfo?.data.email || '',
+        })
+    }
+
+    const handleCardSave = async (updatedDetails) => {
+        console.log("Saved card details:", updatedDetails);
+        const res = await addPaymentMethod(updatedDetails)
+        if (res.status === 200) {
+            alert(res.message)
+            getData()
+        } else {
+            alert("Something went wrong")
+        }
+    };
+
+    const handleCardRemove = async (id) => {
+        console.log("Card removed");
+        const res = await removePaymentMethod(id);
+        if (res.status === 200) {
+            alert(res.message)
+            getData()
+        } else {
+            alert("Something went wrong")
+        }
+    };
     // Handle input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -31,12 +68,35 @@ const Profile = () => {
             [name]: value,
         }));
     };
-
     // Save changes
-    const handleSave = () => {
+    const handleSave = async () => {
         setIsEditing(false);
-        // Logic to update userInfo context or send updated details to backend
+        const res = await updateUserInfo(editableInfo)
+        if (res.status === 200) {
+            alert(res.message)
+            getData()
+        } else {
+            alert("Something went wrong")
+        }
         console.log('Updated Info:', editableInfo);
+    };
+
+    const onEditClick = (cardInfo) => {
+        setIsPopupOpen(true);
+        setIsEditing(true);
+        setCardDetails({
+            id: cardInfo._id,
+            cardNumber: cardInfo.cardNumber,
+            cvc: cardInfo.cvc,
+            expiration: cardInfo.expiration,
+            name: cardInfo.name
+        });
+    };
+
+    const onAddClick = () => {
+        setIsPopupOpen(true);
+        setIsEditing(false);
+        setCardDetails({});
     };
 
     const renderComponent = () => {
@@ -119,16 +179,31 @@ const Profile = () => {
                 <div className={styles.dividerLine}></div>
                 <h2>Saved Payment Methods</h2>
                 <div className={styles.savedPaymentMethods}>
-                    <div className={styles.paymentCard}>
-                        <img src={walletIcon} alt="wallet" />
-                        <p>**** **** **** 1111<br></br><span>K S Ponnanna</span></p>
-                        <img src={editIcon} alt="edit" />
-                    </div>
-                    <div className={styles.paymentCard} style={{justifyContent: 'center'}}>
+                    {userInfo?.paymentMethods?.map((method) => (
+                        <div className={styles.paymentCard}>
+                            <img src={walletIcon} alt="wallet" />
+                            <p>{method?.cardNumber}<br></br><span>{method?.name}</span></p>
+                            <img src={editIcon} alt="edit" onClick={() => onEditClick(method)} />
+                        </div>
+                    ))}
+                    <div
+                        className={styles.paymentCard}
+                        style={{ justifyContent: 'center' }}
+                        onClick={onAddClick}
+                    >
                         <img src={addIcon} alt="add" />
                         <p>Add New Card</p>
                     </div>
                 </div>
+                {isPopupOpen && (
+                    <AddPaymentPopUp
+                        isEdit={isEditing}
+                        cardDetails={isEditing ? cardDetails : {}}
+                        onClose={() => setIsPopupOpen(false)}
+                        onSave={handleCardSave}
+                        onRemove={handleCardRemove}
+                    />
+                )}
             </div>
         );
     };
