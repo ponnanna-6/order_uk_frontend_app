@@ -1,5 +1,5 @@
 // HomeScreen.js
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './home.module.css';
 import food1 from '../../assets/food/food1.png'
 import Header from '../../components/header/header';
@@ -20,14 +20,39 @@ const cld = new Cloudinary({
 });
 const Home = () => {
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
-    const popularCategoriesItems = {
-        burger: `${popularCategoriesPath}/burger`,
-        soups: `${popularCategoriesPath}/soups`,
-        salads: `${popularCategoriesPath}/salads`,
-        pizza: `${popularCategoriesPath}/pizza`,
-        pasta: `${popularCategoriesPath}/pasta`,
-        breakfast: `${popularCategoriesPath}/breakfast`,
-    }
+    const popularCategoriesItems = [
+        {
+          image: `${popularCategoriesPath}/burger`,
+          name: "Burgers & Fast food",
+          restaurants: 5,
+        },
+        {
+          image: `${popularCategoriesPath}/soups`,
+          name: "Soups",
+          restaurants: 7,
+        },
+        {
+          image: `${popularCategoriesPath}/salads`,
+          name: "Salads",
+          restaurants: 3,
+        },
+        {
+          image: `${popularCategoriesPath}/pizza`,
+          name: "Pizza",
+          restaurants: 22,
+        },
+        {
+          image: `${popularCategoriesPath}/pasta`,
+          name: "Pasta & Casuals",
+          restaurants: 13,
+        },
+        {
+          image: `${popularCategoriesPath}/breakfast`,
+          name: "Breakfast",
+          restaurants: 20,
+        },
+      ];
+      
 
     const cards = [
         {
@@ -47,6 +72,26 @@ const Home = () => {
             buttonText: 'Get Started',
         },
     ];
+
+    const offerCards = [
+        {
+            id: 1,
+            image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1733170772/cuvette-food-app/home_page/zggwpmuim7sh3iimydtj.png',
+            title: 'Chef Burgers London',
+            discount: '-40%',
+        },
+        {
+            id: 2,
+            image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1733170774/cuvette-food-app/home_page/bf0whlc0wfz2uz9suxh5.png',
+            title: 'Grand Ai Cafe London',
+            discount: '-20%',
+        },
+        {
+            id: 3,
+            image: 'https://res.cloudinary.com/dgs9nsrid/image/upload/v1733170772/cuvette-food-app/home_page/abhwp3dqskvumjnqeapq.png',
+            discount: '-17%',
+        },
+    ]
 
     return (
         <div className={styles.container}>
@@ -68,56 +113,42 @@ const Home = () => {
 
             {/* Discount Offers */}
             <section className={styles.offersSection}>
-                <h2>Up to -40% <span>🎉</span> Order.uk exclusive deals</h2>
                 <div className={styles.categories}>
-                    <button>Vegan</button>
-                    <button>Sushi</button>
-                    <button className={styles.active}>Pizza & Fast food</button>
-                    <button>others</button>
-                </div>
-                <div className={styles.cards}>
-                    <div className={styles.card}>
-                        <img src={food1} alt="Food" />
-                        <div className={styles.cardDetails}>
-                            <p>Restaurant</p>
-                            <h3>Chef Burgers London</h3>
-                            <span className={styles.discount}>-40%</span>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src={food1} alt="Food" />
-                        <div className={styles.cardDetails}>
-                            <p>Restaurant</p>
-                            <h3>Grand Ai Cafe London</h3>
-                            <span className={styles.discount}>-20%</span>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src={food1} alt="Food" />
-                        <div className={styles.cardDetails}>
-                            <p>Restaurant</p>
-                            <h3>Butterbrot Cafe London</h3>
-                            <span className={styles.discount}>-17%</span>
-                        </div>
+                    <h2>Up to -40% 🎉 Order.uk exclusive deals</h2>
+                    <div>
+                        <button>Vegan</button>
+                        <button>Sushi</button>
+                        <button className={styles.active}>Pizza & Fast food</button>
+                        <button>others</button>
                     </div>
                 </div>
-            </section>
-
-            {/* Popular Categories */}
-            <section className={styles.popularCategories}>
-                <h2>Order.uk Popular Categories</h2>
                 <div className={styles.cards}>
-                    {Object.keys(popularCategoriesItems).map((category) => (
-                        <div key={category} className={styles.card}>
-                            <AdvancedImage cldImg={cld.image(popularCategoriesItems[category])} />
-                            <p>{category}</p>
+                    {offerCards.map((card) => (
+                        <div className={styles.card}>
+                            <img src={card.image} alt="Food" />
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Popular Categories */}
-            <PopularRestaurants title="Popular Restaurants"/>
+            <section className={styles.popularCategories}>
+                <h2>Order.uk Popular Categories 🤩</h2>
+                <div className={styles.cards}>
+                    {popularCategoriesItems.map((category) => (
+                        <div key={category} className={styles.card}>
+                            <AdvancedImage cldImg={cld.image(category.image)} style={{ width: "100%", height: "160px" }} />
+                            <div>
+                                <h4>{category.name}</h4>
+                                <p>{category.restaurants} Restaurants</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Popular Categories */}
+            <PopularRestaurants title="Popular Restaurants" />
 
             {/* Hero 2 Section */}
             <Hero2Section />

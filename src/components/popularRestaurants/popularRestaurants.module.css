@@ -18,15 +18,15 @@
 
 .restaurantLogos {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0rem;
+    gap: 5px;
 }
 
 .restaurantLogo {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;

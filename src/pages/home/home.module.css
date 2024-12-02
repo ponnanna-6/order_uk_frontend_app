@@ -18,7 +18,7 @@
 }
 
 .heroContent h1 span {
-    color: orange;
+    color: #FC8A06;
 }
 
 .heroContent p {
@@ -43,7 +43,7 @@
 
 .searchBar button {
     padding: 0.7rem 1rem;
-    background-color: orange;
+    background-color: #FC8A06;
     border: none;
     color: white;
     font-weight: bold;
@@ -60,6 +60,7 @@
 .offersSection {
     padding: 2rem;
     background-color: #fff;
+    flex-direction: row;
 }
 
 .offersSection h2 {
@@ -72,39 +73,69 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .offersSection .categories button {
-    padding: 0.5rem 1rem;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: 100px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 14px;
+    height: 40px;
+    margin: 5px;
 }
 
 .offersSection .categories .active {
-    background-color: orange;
-    color: white;
+    border: 1px solid #FC8A06;
+    background-color: white;
+    color: #FC8A06;
+    border-color: #FC8A06;
 }
 
-.cards {
+.offersSection .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.popularCategories .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
 }
 
 .card {
+    width: 100%;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
+.card div {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    padding: 0;
+}
+
+.card h4{
+    font-size: 16px;
+    font-weight: 600; 
+    padding-left: 10px;
+    margin-top: 0px;
+}
+
+.card p {
+    font-size: 12px;
+    color: #FC8A06;
+    padding-left: 10px;
+    margin-top: -20px;
+    font-weight: 600;
 }
 
 .cardDetails {
@@ -130,6 +161,12 @@
 .popularCategories {
     padding: 2rem;
     background-color: #fff;
+}
+
+.popularCategories h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
 }
 
 /*Partner rider section - START*/
@@ -232,5 +269,14 @@
     .partnerRiderSection {
         flex-direction: column;
         align-items: center;
+    }
+
+    .categories {
+        flex-direction: column;
+    }
+
+    .popularCategories .cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
     }
 }

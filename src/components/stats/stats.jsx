@@ -15,7 +15,7 @@ export default function Stats () {
                 <div className={styles.faqStatValue}>690+</div>
                 <div className={styles.faqStatLabel}>Restaurants Partnered</div>
             </div>
-            <div className={styles.faqStat}>
+            <div className={styles.faqStat} style={{border: 'none'}}>
                 <div className={styles.faqStatValue}>17,457+</div>
                 <div className={styles.faqStatLabel}>Food Items</div>
             </div>
