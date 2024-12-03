@@ -8,7 +8,7 @@ const FoodCard = ({ id, name, price, description, img, addItemToCart }) => {
       <div className={styles.textSection}>
         <h3 className={styles.foodName}>{name}</h3>
         <p className={styles.foodDescription}>{description}</p>
-        <span className={styles.price}>${price}</span>
+        <span className={styles.price}>₹{price}</span>
       </div>
       <div className={styles.imageSection}>
         <img className={styles.foodImage} src={img} alt={name} />

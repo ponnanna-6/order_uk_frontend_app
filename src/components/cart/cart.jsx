@@ -42,7 +42,7 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart, isPublic, cop
               <span className={styles.extra}>{item.foodInfo.description}</span>
             </div>
             <span className={styles.price}>
-              ${(item.foodInfo.price * item.quantity).toFixed(2)}
+              ₹{(item.foodInfo.price * item.quantity).toFixed(2)}
             </span>
             {!isPublic && <MdDeleteForever
               className={styles.delete}
@@ -56,19 +56,19 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart, isPublic, cop
       <div className={styles.summary}>
         <div className={styles.row}>
           <span>Sub Total:</span>
-          <span>${total.toFixed(2)}</span>
+          <span>₹{total.toFixed(2)}</span>
         </div>
         <div className={styles.row}>
           <span>Discounts:</span>
-          <span className={styles.discount}>-${discounts.toFixed(2)}</span>
+          <span className={styles.discount}>-₹{discounts.toFixed(2)}</span>
         </div>
         <div className={styles.row}>
           <span>Delivery Fee:</span>
-          <span>${deliveryFee.toFixed(2)}</span>
+          <span>₹{deliveryFee.toFixed(2)}</span>
         </div>
         <div className={styles.total}>
           <span>Total to pay</span>
-          <span>${(total - discounts + deliveryFee).toFixed(2)}</span>
+          <span>₹{(total - discounts + deliveryFee).toFixed(2)}</span>
         </div>
       </div>
 
@@ -80,9 +80,9 @@ const Cart = ({ items, discounts, deliveryFee, removeItemFromCart, isPublic, cop
           <button>Apply</button>
         </div>
         <div className={styles.deliveryOptions}>
-          <button className={styles.deliveryTime}>Delivery Starts @ $15</button>
+          <button className={styles.deliveryTime}>Delivery Starts @ ₹15</button>
           <button className={styles.collectionTime}>
-            Collection Starts @ $12
+            Collection Starts @ ₹12
           </button>
         </div>
         <button

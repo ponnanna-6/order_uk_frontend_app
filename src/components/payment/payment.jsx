@@ -44,7 +44,7 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
                         <div className={styles.paymentOptionDiv}>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <img src={walletIcon} alt="wallet" style={{ width: '50px', height: '50px' }} />
-                                <p>Wallet<br /><span>Available balance $320</span></p>
+                                <p>Wallet<br /><span>Available balance ₹320</span></p>
                             </div>
                             <GrFormNext color='#FC8A06' style={{ fontSize: "1rem" }} />
                         </div>
@@ -83,7 +83,7 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
                 <div className={styles.paymentSummary}>
                     <div className={styles.amount}>
                         <p>Amount to be paid</p>
-                        <p style={{ fontWeight: 'bold', color: '#000' }}>${totalAmount}</p>
+                        <p style={{ fontWeight: 'bold', color: '#000' }}>₹{totalAmount}</p>
                     </div>
                     <div className={styles.dividerLine} />
                     <button className={styles.paymentButton} onClick={onPay}>Proceed Payment</button>

@@ -37,7 +37,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
                                         <span className={styles.itemQuantity}>{item.quantity}x item</span>
                                     </div>
 
-                                    <p className={styles.itemPrice}>${item.foodInfo.price * item.quantity}</p>
+                                    <p className={styles.itemPrice}>₹{item.foodInfo.price * item.quantity}</p>
                                 </div>
                             ))}
                             <div className={styles.orderNotes}>
@@ -66,17 +66,17 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
                         <div className={styles.orderInfo}>
                             <div className={styles.orderSummaryItems}>
                                 <p>Items</p>
-                                <p>${totalAmount}</p>
+                                <p>₹{totalAmount}</p>
                             </div>
                             <div className={styles.orderSummaryItems}>
                                 <p>Sales Tax</p>
-                                <p>$10</p>
+                                <p>₹10</p>
                             </div>
                             {!isMobile && <div className={styles.dividerLine}></div>}
 
                             <div className={styles.orderSummaryItems}>
                                 <h4>{`Subtotal (${cartData.length} items)`}</h4>
-                                <h4>${totalAmount + 10}</h4>
+                                <h4>₹{totalAmount + 10}</h4>
                             </div>
                             
                             {isMobile && <div className={styles.dividerLine}></div>}

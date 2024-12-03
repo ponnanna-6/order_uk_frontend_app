@@ -16,7 +16,7 @@ export default function SummaryCard({ restaurantData }) {
                         <p className={styles.subtitle}>{restaurantData.tagLine}</p>
                         <h3 className={styles.title}>{restaurantData.name}</h3>
                         <div className={styles.contentDiv}>
-                            <div className={styles.button}>{`Minimum Order: $${restaurantData.minOrder}`}</div>
+                            <div className={styles.button}>{`Minimum Order: ₹${restaurantData.minOrder}`}</div>
                             <div className={styles.button}>{`Delivery In: ${parseInt(restaurantData.deliveryTime) - 5}-${restaurantData.deliveryTime} Minutes`}</div>
                         </div>
                     </div>
