@@ -9,7 +9,7 @@ import addIcon from '../../assets/payment/add.png'
 import { getUserInfo } from '../../services/auth';
 import { alertToast, errorToast } from '../../helper/toast';
 
-const Delivery = ({ onBack, onSetDefault, isMobile}) => {
+const Delivery = ({ onBack, isMobile, setLoading }) => {
     const [userInfo, setUserInfo] = useState({});
     const [addresses, setAddresses] = useState([]);
 
@@ -21,7 +21,9 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
     }, []);
 
     const getAddressinfo = async () => {
+        setLoading(true)
         const userInfo = await getUserInfo()
+        setLoading(false)
         if (!userInfo) return
         setUserInfo(userInfo.data)
         setAddresses(userInfo.data.Addresses)

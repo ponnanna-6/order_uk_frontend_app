@@ -8,14 +8,16 @@ import OrderSummary from '../../components/orderSummary/orderSummary';
 import Delivery from '../../components/delivery/delivery';
 import Payment from '../../components/payment/payment';
 import { useParams } from 'react-router-dom';
+import Loader from '../../components/loader/loader';
 
 const Checkout = () => {
     const [cartData, setCartData] = useState([]);
     const [activeStep, setActiveStep] = useState("OrderSummary");
     const [totalAmount, setTotalAmount] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [loading, setLoading] = useState(false);
+
     const { id } = useParams();
-    console.log(id)
 
     useEffect(() => {
         const getCartData = async () => {
@@ -33,8 +35,8 @@ const Checkout = () => {
         
             //applying discount and delivery charge
             totalAmount = totalAmount - 12 + 5;
-            console.log(totalAmount)
             setTotalAmount(totalAmount);
+            setLoading(false)
         };
 
         getCartData();
@@ -60,9 +62,9 @@ const Checkout = () => {
                         isMobile={isMobile}
                     />;
             case "Delivery":
-                return <Delivery onBack={() => setActiveStep("OrderSummary")} isMobile={isMobile} />;
+                return <Delivery onBack={() => setActiveStep("OrderSummary")} isMobile={isMobile} setLoading={setLoading} />;
             case "Payment":
-                return <Payment onBack={() => setActiveStep("OrderSummary")} cartData={cartData} totalAmount={totalAmount+10} isMobile={isMobile} />;
+                return <Payment onBack={() => setActiveStep("OrderSummary")} cartData={cartData} totalAmount={totalAmount+10} isMobile={isMobile} setLoading={setLoading} />;
             default:
                 return <OrderSummary cartData={cartData} onNext={() => setActiveStep("Delivery")} />;
         }
@@ -70,6 +72,7 @@ const Checkout = () => {
 
     return (
         <div className={styles.parentContainer}>
+            <Loader loading={loading} />
             <Header hideCart={true}/>
             {renderComponent()}
             {!isMobile && activeStep === "OrderSummary" && <PopularRestaurants/>}

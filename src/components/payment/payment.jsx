@@ -10,7 +10,7 @@ import { getUserInfo } from '../../services/auth';
 import AddPaymentPopUp from '../addPaymentPopUp/addPaymentPopUp';
 import { addPaymentMethod } from '../../services/userInfo';
 import { alertToast, errorToast } from '../../helper/toast';
-const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
+const Payment = ({ onBack, cartData, totalAmount, isMobile, setLoading}) => {
     const [paid, setPaid] = useState(false);
     const [cardData, setCardData] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -20,7 +20,9 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
     }, [])
 
     const getPaymentData = async () => {
+        setLoading(true)
         const userInfo = await getUserInfo()
+        setLoading(false)
         if (!userInfo) return
         setCardData(userInfo.data.paymentMethods)
     }
