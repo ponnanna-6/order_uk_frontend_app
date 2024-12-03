@@ -22,6 +22,7 @@ const Checkout = () => {
     useEffect(() => {
         const getCartData = async () => {
             let cartData = [];
+            setLoading(true)
             if(id) {
                 cartData = await shareCartData(id);
             } else {
