@@ -1,5 +1,5 @@
 // HomeScreen.js
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import styles from './header.module.css';
 import { UserContext } from '../../contexts/userContext';
 import { FaCircleUser } from "react-icons/fa6";
@@ -7,11 +7,20 @@ import cartImg from '../../assets/cart.png'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { getUserInfo } from '../../services/auth';
 import { NavLink, useLocation } from "react-router-dom";
+import { getCartById } from '../../services/cart';
+import { FaArrowCircleDown } from "react-icons/fa";
 
 const Header = ({ hideCart }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  
+  const [cartData, setCartData] = useState("");
+
+  const total = useMemo(() => {
+    return Object.values(cartData).reduce((acc, item) => {
+      return acc + item.foodInfo.price * item.quantity;
+    }, 0);
+  }, [cartData]);
+
   const currentPath = window.location.pathname;
 
   const handleNavigation = (path) => {
@@ -25,6 +34,15 @@ const Header = ({ hideCart }) => {
     }
     getData()
   }, [])
+
+  useEffect(() => {
+    const getCartData = async () => {
+      const cartData = await getCartById();
+      setCartData(cartData.data.cart.items);
+    };
+
+    getCartData();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -95,10 +113,15 @@ const Header = ({ hideCart }) => {
             <span>Change Location</span>
           </div>
         }
-        <div className={styles.cart} onClick={() => window.location.href = '/checkout'}>
-          <span><img src={cartImg} alt="cart" className={styles.cartIcon} /></span>&nbsp;
-          My Cart
+        <div className={styles.cartContainer}>
+          <div className={styles.cart} onClick={() => window.location.href = '/checkout'}>
+            <img src={cartImg} alt="cart" className={styles.cartIcon} />
+            <span className={styles.cartText}>My Cart</span>
+            {/* {total > 0 && <span className={styles.cartTotal}>₹{total}</span>} */}
+            <FaArrowCircleDown className={styles.cartArrow} />
+          </div>
         </div>
+
       </header>}
 
       {/* Header Section */}
