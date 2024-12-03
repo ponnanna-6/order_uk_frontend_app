@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styles from './FAQ.module.css';
+import placeOrder from "../../assets/faq/placeOrder.png"
+import trackOrder from "../../assets/faq/trackProgress.png"
+import getOrder from "../../assets/faq/getOrder.png"
 
-const FAQ = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+const FAQ = ({isMobile}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  
 
   const handleQuestionClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -31,23 +35,60 @@ const FAQ = () => {
     },
   ];
 
+  const imgIcons = [
+    {
+      title: 'Place an Order!',
+      icon: placeOrder,
+      subtitle: 'Place order through our website or mobile app',
+    },
+    {
+      title: 'Track Progress',
+      icon: trackOrder,
+      subtitle: 'You can track your order status with delivery time',
+    },
+    {
+      title: 'Get Your Order',
+      icon: getOrder,
+      subtitle: 'Receive your order at a lightning fast speed!',
+    }
+  ]
+
   return (
     <div className={styles.faqContainer}>
-      <h2 className={styles.faqHeader}>Know more about us!</h2>
-      {faqData.map((item, index) => (
-        <div key={index} className={styles.faqItem}>
-          <div
-            className={styles.faqQuestion}
-            onClick={() => handleQuestionClick(index)}
-          >
-            {item.question}
-            {activeIndex === index ? '-' : '+'}
-          </div>
-          {activeIndex === index && (
-            <div className={styles.faqAnswer}>{item.answer}</div>
-          )}
+      <div className={styles.faqHeader}>
+        <h2 className={styles.header}>Know more about us!</h2>
+        <div className={styles.nav}>
+          <span className={`${styles.navItem} ${styles.active}`}>Frequent Questions</span>
+          <span className={styles.navItem}>Who we are?</span>
+          <span className={styles.navItem}>Partner Program</span>
+          <span className={styles.navItem}>Help & Support</span>
         </div>
-      ))}
+      </div>
+      <div className={styles.contentContainer}>
+        <div className={styles.questions}>
+          {faqData.map((item, index) => (
+            <div
+              key={index}
+              className={`${styles.questionItem} ${activeIndex === index ? styles.activeQuestion : ''}`}
+              onClick={() => handleQuestionClick(index)}
+            >
+              {item.question}
+            </div>
+          ))}
+        </div>
+        <div className={styles.answerSection}>
+          <div className={styles.answerIconContainer}>
+            {imgIcons.map((item, index) => (
+              <div key={index} className={styles.answerItem}>
+                <h3 className={styles.title}>{item.title}</h3>
+                <img src={item.icon} alt={item.title} className={styles.icon} />
+                <p className={styles.subtitle}>{item.subtitle}</p>
+              </div>
+            ))}
+          </div>
+          {activeIndex !== null && <p className={styles.answer}>{faqData[activeIndex].answer}</p>}
+        </div>
+      </div>
     </div>
   );
 };

@@ -19,6 +19,7 @@ const cld = new Cloudinary({
     }
 });
 const Home = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
     const popularCategoriesItems = [
         {
@@ -53,7 +54,6 @@ const Home = () => {
         },
       ];
       
-
     const cards = [
         {
             id: 1,
@@ -92,6 +92,16 @@ const Home = () => {
             discount: '-17%',
         },
     ]
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -171,7 +181,7 @@ const Home = () => {
             </section>
 
             {/*FAQ*/}
-            <FAQ />
+            <FAQ isMobile={isMobile}/>
 
             {/* About Us Section */}
             <Stats />
