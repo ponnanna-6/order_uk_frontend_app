@@ -168,7 +168,7 @@ const Product = () => {
             <Header />
 
             {/* Product Summary */}
-            <SummaryCard restaurantData={restaturantById} />
+            <SummaryCard restaurantData={restaturantById} isMobile={isMobile} />
 
             {/* Search Section  */}
             <div className={styles.searchHeaderConatiner}>
@@ -257,7 +257,7 @@ const Product = () => {
             <MapWithInfoCard restaurantData={restaturantById} />
 
             {/* Customer Reviews */}
-            <CustomerReviews />
+            <CustomerReviews isMobile={isMobile} />
 
             {/* Popular Restaurants */}
             <PopularRestaurants />

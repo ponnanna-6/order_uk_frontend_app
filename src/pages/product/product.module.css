@@ -112,6 +112,12 @@
     margin-bottom: 20px;
 }
 
+.categorySection h2 {
+    padding-left: 20px;
+    font-size: 24px;
+    color: #000;
+}
+
 .foodItems {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -121,7 +127,7 @@
 .cartContainer {
     flex: 1;
     max-width: 350px;
-    position: sticky;
+    position: relative;
     top: 10px;
     align-self: flex-start;
 }

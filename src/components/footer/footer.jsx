@@ -29,7 +29,7 @@ const Footer = () => {
             <input type="email" placeholder="youremail@gmail.com" />
             <button>Subscribe</button>
           </div>
-          <p>we won’t spam, read our <a href="/email-policy">email policy</a></p>
+          <p>we won’t spam, read our <a>email policy</a></p>
           <div className={styles.socialIcons}>
             <img src={Facebook} alt="facebook"/>
             <img src={Instagram} className="instagram"/>
@@ -59,10 +59,10 @@ const Footer = () => {
       <div className={styles.bottomSection}>
         <p>Order.uk Copyright 2024, All Rights Reserved.</p>
         <div className={styles.bottomLinks}>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms">Terms</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/do-not-sell">Do not sell or share my personal information</a>
+          <a>Privacy Policy</a>
+          <a>Terms</a>
+          <a>Pricing</a>
+          <a>Do not sell or share my personal information</a>
         </div>
       </div>
     </footer>

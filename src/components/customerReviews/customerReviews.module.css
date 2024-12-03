@@ -108,5 +108,21 @@
 
     .reviewCard {
         flex: 0 0 90%;
+        width: 100%;
+    }
+
+    .scrollButton {
+        background: #f4b400;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 }

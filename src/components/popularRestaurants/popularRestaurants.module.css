@@ -45,3 +45,13 @@
     border-radius: 8px;
     object-fit: cover;
 }
+
+@media (max-width: 768px) {
+    .popularRestaurants {
+        padding: 1rem;
+    }
+
+    .restaurantLogos {
+        gap: 10px;
+    }
+}

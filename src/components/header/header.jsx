@@ -12,8 +12,11 @@ import { FaArrowCircleDown } from "react-icons/fa";
 
 const Header = ({ hideCart }) => {
   const [userInfo, setUserInfo] = useState({});
+  const [address, setAddress] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [cartData, setCartData] = useState("");
+  const location = useLocation(); 
+  console.log("LOCATION: ", location)
 
   const total = useMemo(() => {
     return Object.values(cartData).reduce((acc, item) => {
@@ -31,6 +34,8 @@ const Header = ({ hideCart }) => {
     const getData = async () => {
       const userInfo = await getUserInfo()
       setUserInfo(userInfo.data)
+      const address = userInfo.data.Addresses
+      setAddress(address)
     }
     getData()
   }, [])
@@ -60,7 +65,10 @@ const Header = ({ hideCart }) => {
           <img src="/logo.png" alt="logo" className={styles.logo} />
           <button
             onClick={() => handleNavigation('/')}
-            className={currentPath === '/' ? styles.active : ''}
+            style={{
+              backgroundColor: location?.pathname === '/' ? '#FC8A06' : '#fff',
+              color: location?.pathname === '/' ? '#fff' : '#000'
+            }}
           >
             Home
           </button>
@@ -70,7 +78,12 @@ const Header = ({ hideCart }) => {
           <button>
             Special Offers
           </button>
-          <button>
+          <button 
+            style={{
+              backgroundColor: location?.pathname.startsWith('/restaurant') ? '#FC8A06' : '#fff',
+              color: location?.pathname.startsWith('/restaurant') ? '#fff' : '#000'
+            }}
+          >
             Restaurants
           </button>
           <button>
@@ -107,9 +120,9 @@ const Header = ({ hideCart }) => {
       {/* Header Section */}
       {!isMobile && <header className={styles.header}>
         <div className={styles.offer}>🌟 Get 5% Off your first order.&nbsp;<span><b>Promo:ORDER5</b></span></div>
-        {userInfo &&
+        {address.length > 0 &&
           <div className={styles.location}>
-            {userInfo?.Addresses && `${userInfo?.Addresses[0]?.district}, ${userInfo?.Addresses[0]?.state}, ${userInfo?.Addresses[0]?.pincode}`}&nbsp;
+            {address.length > 0 && `${address[0]?.district}, ${address[0]?.state}, ${address[0]?.pincode}`}&nbsp;
             <span>Change Location</span>
           </div>
         }
