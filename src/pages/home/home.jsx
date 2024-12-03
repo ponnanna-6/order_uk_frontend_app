@@ -133,8 +133,8 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={styles.cards}>
-                    {offerCards.map((card) => (
-                        <div className={styles.card}>
+                    {offerCards.map((card, index) => (
+                        <div key={index} className={styles.card}>
                             <img src={card.image} alt="Food" />
                         </div>
                     ))}
@@ -145,8 +145,8 @@ const Home = () => {
             <section className={styles.popularCategories}>
                 <h2>Order.uk Popular Categories 🤩</h2>
                 <div className={styles.cards}>
-                    {popularCategoriesItems.map((category) => (
-                        <div key={category} className={styles.card}>
+                    {popularCategoriesItems.map((category, index) => (
+                        <div key={index} className={styles.card}>
                             <AdvancedImage cldImg={cld.image(category.image)} style={{ width: "100%", height: "160px" }} />
                             <div>
                                 <h4>{category.name}</h4>

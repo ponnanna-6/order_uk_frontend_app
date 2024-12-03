@@ -15,8 +15,7 @@ const Header = ({ hideCart }) => {
   const [address, setAddress] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [cartData, setCartData] = useState("");
-  const location = useLocation(); 
-  console.log("LOCATION: ", location)
+  const location = useLocation();
 
   const total = useMemo(() => {
     return Object.values(cartData).reduce((acc, item) => {
