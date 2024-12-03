@@ -17,6 +17,7 @@ import Cart from '../../components/cart/cart';
 import { addItemsToCart, getCartById } from '../../services/cart';
 import { BiSearch } from "react-icons/bi"
 import { alertToast, errorToast } from '../../helper/toast';
+import Loader from '../../components/loader/loader';
 
 
 const Product = () => {
@@ -27,6 +28,7 @@ const Product = () => {
     const [shouldRefetchCart, setShouldRefetchCart] = useState(false);
     const [cartId, setCartId] = useState(null);
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -48,7 +50,14 @@ const Product = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true)
             const restaturantById = await getRestaurantById(id)
+            if (restaturantById.status !== 200) {
+                setLoading(false)
+                errorToast(restaturantById.message)
+                return
+            }
+            setLoading(false)
             setRestautantById(restaturantById.data)
         }
 
@@ -66,11 +75,17 @@ const Product = () => {
     }, [])
 
     useEffect(() => {
-        console.log("refetching cart")
         const getCartData = async () => {
+            setLoading(true)
             const cartData = await getCartById();
+            if(cartData.status !== 200) {
+                errorToast(cartData.message)
+                setLoading(false)
+                return
+            }
             setCartData(cartData.data.cart.items);
             setCartId(cartData.data.cart._id);
+            setLoading(false)
         };
 
         getCartData();
@@ -100,10 +115,13 @@ const Product = () => {
         const tempCartData = cartData
         const itemIndex = tempCartData.findIndex((item) => item.foodItem === itemId);
         const foodById = allFoodItems.find((foodItem) => foodItem._id === itemId)
-
+        setLoading(true)
         if (itemIndex !== -1) {
             tempCartData[itemIndex].quantity += 1;
-            await addItemsToCart({ items: tempCartData })
+            const res = await addItemsToCart({ items: tempCartData })
+            if (res.status !== 200) {
+                errorToast(res.message)
+            }
         } else {
             const newItem = {
                 foodItem: itemId,
@@ -116,8 +134,12 @@ const Product = () => {
                 },
                 quantity: 1
             };
-            await addItemsToCart({ items: [...tempCartData, newItem] })
+            const res = await addItemsToCart({ items: [...tempCartData, newItem] })
+            if (res.status !== 200) {
+                errorToast(res.message)
+            }
         }
+        setLoading(false)
         setShouldRefetchCart(!shouldRefetchCart)
     };
 
@@ -143,6 +165,7 @@ const Product = () => {
     }
 
     const handleSearch = async () => {
+        setLoading(true)
         const response = await searchFoodItems(query.trim());
         if (response.status === 200) {
             processFoodItems(response.data)
@@ -150,6 +173,7 @@ const Product = () => {
             console.error('Search Error:', response.message);
             errorToast(response.message || 'An error occurred while searching.');
         }
+        setLoading(false)
     };
 
     const handleKeyPress = (e) => {
@@ -165,6 +189,7 @@ const Product = () => {
 
     return (
         <div className={styles.parentContainer}>
+            <Loader loading={loading}/>
             {/* Header Section */}
             <Header />
 
