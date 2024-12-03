@@ -51,7 +51,6 @@ export default function SummaryCard({ restaurantData, isMobile }) {
                     height: "100%",
                 }}
             >
-
                 <div className={styles.cardImgMobile}>
                     <img src={restaurantData.bgImg} alt={restaurantData.title} />
                     <RatingCard rating={restaurantData.rating} styling={styles.ratingCardMobile} />
