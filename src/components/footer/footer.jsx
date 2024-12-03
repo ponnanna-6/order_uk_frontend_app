@@ -41,17 +41,17 @@ const Footer = () => {
         <div className={styles.links}>
           <div>
             <h3>Legal Pages</h3>
-            <a href="/terms">Terms and conditions</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/cookies">Cookies</a>
-            <a href="/modern-slavery">Modern Slavery Statement</a>
+            <a>Terms and conditions</a>
+            <a>Privacy</a>
+            <a>Cookies</a>
+            <a>Modern Slavery Statement</a>
           </div>
           <div>
             <h3>Important Links</h3>
-            <a href="/help">Get help</a>
-            <a href="/add-restaurant">Add your restaurant</a>
-            <a href="/sign-up">Sign up to deliver</a>
-            <a href="/business-account">Create a business account</a>
+            <a>Get help</a>
+            <a>Add your restaurant</a>
+            <a href="/register">Sign up to deliver</a>
+            <a>Create a business account</a>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './payment.module.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { deleteItemFromCart } from '../../services/cart';
@@ -6,8 +6,23 @@ import walletIcon from '../../assets/payment/wallet.png'
 import { GrFormNext } from "react-icons/gr";
 import sucessIcon from "../../assets/payment/sucess.png"
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { getUserInfo } from '../../services/auth';
+import AddPaymentPopUp from '../addPaymentPopUp/addPaymentPopUp';
+import { addPaymentMethod } from '../../services/userInfo';
 const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
     const [paid, setPaid] = useState(false);
+    const [cardData, setCardData] = useState([]);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    useEffect(() => {
+        getPaymentData();
+    }, [])
+
+    const getPaymentData = async () => {
+        const userInfo = await getUserInfo()
+        if (!userInfo) return
+        setCardData(userInfo.data.paymentMethods)
+    }
 
     const renderHeader = () => {
         if (isMobile) {
@@ -32,7 +47,17 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
         setPaid(true);
         resetCart();
     }
-    
+
+    const handleCardSave = async (updatedDetails) => {
+        const res = await addPaymentMethod(updatedDetails)
+        if (res.status === 200) {
+            alert(res.message)
+            getPaymentData()
+        } else {
+            alert("Something went wrong")
+        }
+    };
+
     const foodNames = cartData.map(item => item.foodInfo.name);
 
     return (
@@ -48,32 +73,22 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
                             </div>
                             <GrFormNext color='#FC8A06' style={{ fontSize: "1rem" }} />
                         </div>
-                        <div className={styles.paymentOptionDiv}>
-                            <div className={styles.paymentOptionContent}>
-                                <img src={walletIcon} alt="wallet" className={styles.paymentOptionImg} />
-                                <p>Mastercard</p>
-                            </div>
-                            <input type="radio" name="paymentOption" className={styles.paymentOptionRadio} />
-                        </div>
 
-                        <div className={styles.paymentOptionDiv}>
-                            <div className={styles.paymentOptionContent}>
-                                <img src={walletIcon} alt="wallet" className={styles.paymentOptionImg} />
-                                <p>Visa</p>
+                        {cardData.map((method) => (
+                            <div className={styles.paymentOptionDiv}>
+                                <div className={styles.paymentOptionContent}>
+                                    <img src={walletIcon} alt="wallet" className={styles.paymentOptionImg} />
+                                    <p>{method?.name}</p>
+                                </div>
+                                <input type="radio" name="paymentOption" className={styles.paymentOptionRadio} />
                             </div>
-                            <input type="radio" name="paymentOption" className={styles.paymentOptionRadio} />
-                        </div>
+                        ))}
 
-                        <div className={styles.paymentOptionDiv}>
-                            <div className={styles.paymentOptionContent}>
-                                <img src={walletIcon} alt="wallet" className={styles.paymentOptionImg} />
-                                <p>Rupee</p>
-                            </div>
-                            <input type="radio" name="paymentOption" className={styles.paymentOptionRadio} />
-                        </div>
-
-                        <div className={styles.paymentOptionDiv}>
-                            <div className={styles.paymentOptionContent} style={{ padding: '15px', paddingLeft: '20px' }}>
+                        <div className={styles.paymentOptionDiv} onClick={() => setIsPopupOpen(true)}>
+                            <div
+                                className={styles.paymentOptionContent}
+                                style={{ padding: '15px', paddingLeft: '20px'}}
+                            >
                                 <p style={{ fontWeight: '100', cursor: 'pointer' }}>+ Add Debit Card</p>
                             </div>
                         </div>
@@ -105,6 +120,15 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
                     </div>
                 </div>
             </>}
+
+            {isPopupOpen && (
+                <AddPaymentPopUp
+                    isEdit={false}
+                    cardDetails={{}}
+                    onClose={() => setIsPopupOpen(false)}
+                    onSave={handleCardSave}
+                />
+            )}
         </div>
     );
 };
