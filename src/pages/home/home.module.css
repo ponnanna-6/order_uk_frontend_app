@@ -232,6 +232,11 @@
         text-align: center;
     }
 
+    .cardPR {
+        width: 100%;
+        height: auto;
+    }
+
     .heroContent {
         margin-bottom: 2rem;
     }
