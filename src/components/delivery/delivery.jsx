@@ -6,18 +6,25 @@ import AddAddressPopup from '../addAddressPopUp/addAddressPopUp';
 import { deleteAddress } from '../../services/userInfo';
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import addIcon from '../../assets/payment/add.png'
+import { getUserInfo } from '../../services/auth';
 
 const Delivery = ({ onBack, onSetDefault, isMobile}) => {
-    let userInfo = useContext(UserContext);
-    const addresses = userInfo.Addresses;
+    const [userInfo, setUserInfo] = useState({});
+    const [addresses, setAddresses] = useState([]);
 
     const [showAddAddressPopup, setShowAddAddressPopup] = useState(false);
-    const [refetchData, setRefetchData] = useState(true);
     const [editInfo, setEditInfo] = useState({});
 
     useEffect(() => {
-        console.log(userInfo);
-    }, [refetchData]);
+        getAddressinfo();
+    }, []);
+
+    const getAddressinfo = async () => {
+        const userInfo = await getUserInfo()
+        if (!userInfo) return
+        setUserInfo(userInfo.data)
+        setAddresses(userInfo.data.Addresses)
+    }
 
     const renderHeader = () => {
         if (isMobile) {
@@ -41,17 +48,18 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
         } else {
             alert("Something went wrong");
         }
-        setRefetchData(!refetchData);
+        getAddressinfo()
     };
 
-    const onSave = () => {
-        setShowAddAddressPopup(false);
-        setRefetchData(!refetchData);
+    const onSaveAddress = () => {
+        console.log("Address saved");
+        getAddressinfo()
     };
 
     const onEdit = (address) => {
         setEditInfo(address);
         setShowAddAddressPopup(true);
+        getAddressinfo()
     };
 
     const onAdd = () => {
@@ -71,7 +79,7 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
                         <img src={addIcon} alt="add" style={{ width: '50px', height: '50px' }} />
                         <h4 style={{ fontSize: '20px', color: '#000' }}>Add Address</h4>
                     </div>
-                    {addresses.map((address, index) => (
+                    {userInfo &&addresses.map((address, index) => (
                         <div className={styles.card} key={index}>
                             <h4>{userInfo.name}</h4>
                             <p>{address.address}</p>
@@ -88,7 +96,7 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
                 {showAddAddressPopup &&
                     <AddAddressPopup 
                         onClose={() => setShowAddAddressPopup(false)}
-                        onSave={onSave}
+                        onSave={onSaveAddress}
                         editInfo={editInfo}
                     />
                 }

@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 import styles from './addAddressPopUp.module.css';
 import { addAddress, updateAddress } from '../../services/userInfo';
+import { IoLocationOutline } from "react-icons/io5";
 
-const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
-    const [state, setState] = useState('');
-    const [city, setCity] = useState('');
-    const [pinCode, setPinCode] = useState('');
+const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
+    const [state, setState] = useState(editInfo ? editInfo.state : '');
+    const [city, setCity] = useState(editInfo ? editInfo.district : '');
+    const [pinCode, setPinCode] = useState(editInfo ? editInfo.pincode : '');
     const [phone, setPhone] = useState(editInfo ? editInfo.phoneNumber : '');
     const [fullAddress, setFullAddress] = useState(editInfo ? editInfo.address : '');
-    const [fromEdit, setFromEdit] = useState(editInfo ? true : false);
-
-    const handleSubmit = async() => {
-        if (!phone || !fullAddress) {
+    const [fromEdit, setFromEdit] = useState(Object.keys(editInfo).length ? true : false);
+    
+    const handleSubmit = async () => {
+        if (!phone || !fullAddress || !state || !city || !pinCode) {
             alert('Please fill out all fields.');
             return;
         }
 
         const address = {
-            address: `${fullAddress} ${city} ${state} ${pinCode}`.trim(),
+            address: fullAddress,
+            state: state,
+            district: city,
+            pincode: pinCode,
             phoneNumber: phone,
             default: false
         };
-        let res=""
+        let res = ""
 
-        if(fromEdit) {
+        if (fromEdit) {
             res = await updateAddress(editInfo._id, address)
         } else {
             res = await addAddress(address)
@@ -31,18 +35,18 @@ const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
         if (res.status == 200) {
             alert(res.message)
             onSave();
-            onClose();
+        } else {
+            alert(res.message)
         }
         onClose();
     };
 
     return (
-        <div className={styles.popupOverlay}>
-            <div className={styles.popupContent}>
-                <h3>Add Address</h3>
+        <div className={styles.popupOverlay} onClick={onClose}>
+            <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
+                <h3><span><IoLocationOutline /></span>&nbsp;Add Address</h3>
                 <div className={styles.inputRow}>
                     <div className={styles.inputGroup}>
-                        <label>State</label>
                         <input
                             type="text"
                             value={state}
@@ -51,18 +55,13 @@ const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
                         />
                     </div>
                     <div className={styles.inputGroup}>
-                        <label>City/District</label>
                         <input
                             type="text"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             placeholder="City/District"
                         />
-                    </div>
-                </div>
-                <div className={styles.inputRow}>
-                    <div className={styles.inputGroup}>
-                        <label>Pin Code</label>
+                    </div><div className={styles.inputGroup}>
                         <input
                             type="text"
                             value={pinCode}
@@ -71,7 +70,6 @@ const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
                         />
                     </div>
                     <div className={styles.inputGroup}>
-                        <label>Phone Number</label>
                         <input
                             type="text"
                             value={phone}
@@ -81,7 +79,6 @@ const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
                     </div>
                 </div>
                 <div className={styles.inputGroupFullWidth}>
-                    <label>Enter Full Address</label>
                     <textarea
                         value={fullAddress}
                         onChange={(e) => setFullAddress(e.target.value)}
@@ -90,7 +87,7 @@ const AddAddressPopup = ({ onClose, onSave, editInfo}) => {
                 </div>
                 <div className={styles.buttonGroup}>
                     <button onClick={handleSubmit} className={styles.saveButton}>Save</button>
-                    <button onClick={onClose} className={styles.cancelButton}>Cancel</button>
+                    {/* <button onClick={onClose} className={styles.cancelButton}>Cancel</button> */}
                 </div>
             </div>
         </div>
