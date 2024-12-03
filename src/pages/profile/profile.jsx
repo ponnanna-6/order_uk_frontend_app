@@ -11,6 +11,7 @@ import { addPaymentMethod, removePaymentMethod, updateUserInfo } from '../../ser
 import AddPaymentPopUp from '../../components/addPaymentPopUp/addPaymentPopUp';
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { alertToast, errorToast } from '../../helper/toast';
+import Loader from '../../components/loader/loader';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -24,6 +25,7 @@ const Profile = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardDetails, setCardDetails] = useState({});
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getData()
@@ -39,7 +41,14 @@ const Profile = () => {
       }, []);
 
     const getData = async () => {
+        setIsLoading(true)
         const userInfo = await getUserInfo()
+        if (userInfo.status !== 200) {
+            setIsLoading(false)
+            errorToast(userInfo.message)
+            return
+        }
+        setIsLoading(false)
         setUserInfo(userInfo.data)
         setEditableInfo({
             name: userInfo?.data.name || '',
@@ -199,8 +208,8 @@ const Profile = () => {
                 </div>
                 <h2 className={styles.paymentHeader}>Saved Payment Methods</h2>
                 <div className={styles.savedPaymentMethods}>
-                    {userInfo?.paymentMethods?.map((method) => (
-                        <div className={styles.paymentCard}>
+                    {userInfo?.paymentMethods?.map((method, index) => (
+                        <div key={index} className={styles.paymentCard}>
                             <img src={walletIcon} alt="wallet" />
                             <p>XXXX XXXX XXXX {method?.cardNumber.slice(-4)}<br></br><span>{method?.name}</span></p>
                             <img src={editIcon} alt="edit" onClick={() => onEditClick(method)} />
@@ -229,6 +238,7 @@ const Profile = () => {
 
     return (
         <div className={styles.parentContainer}>
+            <Loader loading={isLoading} />
             <Header hideCart={true} />
             {renderComponent()}
             {!isMobile && <Footer />}
