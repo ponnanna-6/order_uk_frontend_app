@@ -11,8 +11,7 @@ import { NavLink, useLocation } from "react-router-dom";
 const Header = ({ hideCart }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const location = useLocation();
-
+  
   const currentPath = window.location.pathname;
 
   const handleNavigation = (path) => {
@@ -90,7 +89,12 @@ const Header = ({ hideCart }) => {
       {/* Header Section */}
       {!isMobile && <header className={styles.header}>
         <div className={styles.offer}>🌟 Get 5% Off your first order.&nbsp;<span><b>Promo:ORDER5</b></span></div>
-        <div className={styles.location}>Regent Street, A5, 42401, London.&nbsp;<span>Change Location</span></div>
+        {userInfo &&
+          <div className={styles.location}>
+            {userInfo?.Addresses && `${userInfo?.Addresses[0]?.district}, ${userInfo?.Addresses[0]?.state}, ${userInfo?.Addresses[0]?.pincode}`}&nbsp;
+            <span>Change Location</span>
+          </div>
+        }
         <div className={styles.cart} onClick={() => window.location.href = '/checkout'}>
           <span><img src={cartImg} alt="cart" className={styles.cartIcon} /></span>&nbsp;
           My Cart
