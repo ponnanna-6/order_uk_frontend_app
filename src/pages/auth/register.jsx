@@ -6,6 +6,7 @@ import { registerUser } from '../../services/auth'
 import { validateEmail } from '../../helper/utils'
 import Footer from '../../components/footer/footer'
 import foodImg from '../../assets/food_auth.png'
+import { alertToast, errorToast } from '../../helper/toast'
 
 export default function Register() {
     const navigate = useNavigate()
@@ -114,8 +115,9 @@ export default function Register() {
 
             if (res.status == 200) {
                 navigate('/login')
+                alertToast(res.message)
             } else {
-                alert("ERROR")
+                errorToast(res.message)
             }
         } else {
             console.log(error)

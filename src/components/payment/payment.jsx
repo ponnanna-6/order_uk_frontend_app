@@ -9,6 +9,7 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { getUserInfo } from '../../services/auth';
 import AddPaymentPopUp from '../addPaymentPopUp/addPaymentPopUp';
 import { addPaymentMethod } from '../../services/userInfo';
+import { alertToast, errorToast } from '../../helper/toast';
 const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
     const [paid, setPaid] = useState(false);
     const [cardData, setCardData] = useState([]);
@@ -51,10 +52,10 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
     const handleCardSave = async (updatedDetails) => {
         const res = await addPaymentMethod(updatedDetails)
         if (res.status === 200) {
-            alert(res.message)
+            alertToast(res.message)
             getPaymentData()
         } else {
-            alert("Something went wrong")
+            errorToast("Something went wrong")
         }
     };
 

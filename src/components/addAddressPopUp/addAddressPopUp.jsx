@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './addAddressPopUp.module.css';
 import { addAddress, updateAddress } from '../../services/userInfo';
 import { IoLocationOutline } from "react-icons/io5";
+import {alertToast, errorToast} from '../../helper/toast'
 
 const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
     const [state, setState] = useState(editInfo ? editInfo.state : '');
@@ -13,7 +14,7 @@ const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
     
     const handleSubmit = async () => {
         if (!phone || !fullAddress || !state || !city || !pinCode) {
-            alert('Please fill out all fields.');
+            errorToast('Please fill out all fields.');
             return;
         }
 
@@ -33,10 +34,10 @@ const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
             res = await addAddress(address)
         }
         if (res.status == 200) {
-            alert(res.message)
+            alertToast(res.message)
             onSave();
         } else {
-            alert(res.message)
+            errorToast(res.message)
         }
         onClose();
     };

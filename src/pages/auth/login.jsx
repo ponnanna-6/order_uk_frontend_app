@@ -6,6 +6,7 @@ import { getIdFromToken, validateEmail } from '../../helper/utils'
 import { loginUser } from '../../services/auth'
 import Footer from '../../components/footer/footer'
 import foodImg from '../../assets/food_auth.png'
+import { alertToast, errorToast } from '../../helper/toast'
 
 export default function Login() {
     const navigate = useNavigate()
@@ -80,11 +81,11 @@ export default function Login() {
             const res = await loginUser(formData)
 
             if (res.status == 200) {
-                alert(res.data.message)
+                alertToast(res.data.message)
                 localStorage.setItem('token', res.data.token)
                 navigate('/')
             } else {
-                alert(res.message)
+                errorToast(res.message)
             }
         } else {
             console.log(error)

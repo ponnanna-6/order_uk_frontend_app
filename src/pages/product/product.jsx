@@ -16,6 +16,7 @@ import FoodCard from '../../components/foodCard/foodCard';
 import Cart from '../../components/cart/cart';
 import { addItemsToCart, getCartById } from '../../services/cart';
 import { BiSearch } from "react-icons/bi"
+import { alertToast, errorToast } from '../../helper/toast';
 
 
 const Product = () => {
@@ -138,7 +139,7 @@ const Product = () => {
 
     const copyLink = async () => {
         await navigator.clipboard.writeText(`${window.location.origin}/checkout/${cartId}`);
-        alert("Link copied to clipboard!")
+        alertToast("Link copied to clipboard!")
     }
 
     const handleSearch = async () => {
@@ -147,7 +148,7 @@ const Product = () => {
             processFoodItems(response.data)
         } else {
             console.error('Search Error:', response.message);
-            alert(response.message || 'An error occurred while searching.');
+            errorToast(response.message || 'An error occurred while searching.');
         }
     };
 

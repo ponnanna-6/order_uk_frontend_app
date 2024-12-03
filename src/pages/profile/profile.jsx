@@ -10,6 +10,7 @@ import { getUserInfo } from '../../services/auth';
 import { addPaymentMethod, removePaymentMethod, updateUserInfo } from '../../services/userInfo';
 import AddPaymentPopUp from '../../components/addPaymentPopUp/addPaymentPopUp';
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { alertToast, errorToast } from '../../helper/toast';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -52,10 +53,10 @@ const Profile = () => {
         console.log("Saved card details:", updatedDetails);
         const res = await addPaymentMethod(updatedDetails)
         if (res.status === 200) {
-            alert(res.message)
+            alertToast(res.message)
             getData()
         } else {
-            alert("Something went wrong")
+            errorToast("Something went wrong")
         }
     };
 
@@ -63,10 +64,10 @@ const Profile = () => {
         console.log("Card removed");
         const res = await removePaymentMethod(id);
         if (res.status === 200) {
-            alert(res.message)
+            alertToast(res.message)
             getData()
         } else {
-            alert("Something went wrong")
+            errorToast("Something went wrong")
         }
     };
     // Handle input change
@@ -82,10 +83,10 @@ const Profile = () => {
         setIsEditing(false);
         const res = await updateUserInfo(editableInfo)
         if (res.status === 200) {
-            alert(res.message)
+            alertToast(res.message)
             getData()
         } else {
-            alert("Something went wrong")
+            errorToast("Something went wrong")
         }
         console.log('Updated Info:', editableInfo);
     };

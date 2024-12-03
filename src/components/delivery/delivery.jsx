@@ -7,6 +7,7 @@ import { deleteAddress } from '../../services/userInfo';
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import addIcon from '../../assets/payment/add.png'
 import { getUserInfo } from '../../services/auth';
+import { alertToast, errorToast } from '../../helper/toast';
 
 const Delivery = ({ onBack, onSetDefault, isMobile}) => {
     const [userInfo, setUserInfo] = useState({});
@@ -44,9 +45,9 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
     const onRemove = async(id) => {
         const res = await deleteAddress(id);
         if(res.status === 200) {
-            alert(res.message);
+            alertToast(res.message);
         } else {
-            alert("Something went wrong");
+            errorToast("Something went wrong");
         }
         getAddressinfo()
     };

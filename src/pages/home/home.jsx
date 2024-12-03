@@ -21,7 +21,7 @@ const cld = new Cloudinary({
 });
 const Home = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
     const popularCategoriesItems = [
         {
