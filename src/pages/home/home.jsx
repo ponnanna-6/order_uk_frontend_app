@@ -11,7 +11,7 @@ import { Hero2Section } from '../../components/hero2/hero2';
 import FAQ from '../../components/FAQ/FAQ';
 import Stats from '../../components/stats/stats';
 import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
-import Loader from '../../components/loader/Loader';
+import Loader from '../../components/loader/loader';
 
 const cld = new Cloudinary({
     cloud: {

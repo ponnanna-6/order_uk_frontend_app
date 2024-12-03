@@ -3,6 +3,7 @@ import styles from './addAddressPopUp.module.css';
 import { addAddress, updateAddress } from '../../services/userInfo';
 import { IoLocationOutline } from "react-icons/io5";
 import {alertToast, errorToast} from '../../helper/toast'
+import Loader from '../loader/loader';
 
 const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
     const [state, setState] = useState(editInfo ? editInfo.state : '');
@@ -11,6 +12,7 @@ const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
     const [phone, setPhone] = useState(editInfo ? editInfo.phoneNumber : '');
     const [fullAddress, setFullAddress] = useState(editInfo ? editInfo.address : '');
     const [fromEdit, setFromEdit] = useState(Object.keys(editInfo).length ? true : false);
+    const [loading, setLoading] = useState(false);
     
     const handleSubmit = async () => {
         if (!phone || !fullAddress || !state || !city || !pinCode) {
@@ -27,7 +29,7 @@ const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
             default: false
         };
         let res = ""
-
+        setLoading(true)
         if (fromEdit) {
             res = await updateAddress(editInfo._id, address)
         } else {
@@ -39,11 +41,13 @@ const AddAddressPopup = ({ onClose, onSave, editInfo }) => {
         } else {
             errorToast(res.message)
         }
+        setLoading(false)
         onClose();
     };
 
     return (
         <div className={styles.popupOverlay} onClick={onClose}>
+            <Loader loading={loading} />
             <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
                 <h3><span><IoLocationOutline /></span>&nbsp;Add Address</h3>
                 <div className={styles.inputRow}>
