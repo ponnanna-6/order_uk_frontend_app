@@ -11,6 +11,7 @@ import { Hero2Section } from '../../components/hero2/hero2';
 import FAQ from '../../components/FAQ/FAQ';
 import Stats from '../../components/stats/stats';
 import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
+import Loader from '../../components/loader/Loader';
 
 const cld = new Cloudinary({
     cloud: {
@@ -20,6 +21,7 @@ const cld = new Cloudinary({
 });
 const Home = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [loading, setLoading] = useState(true);
     const popularCategoriesPath = "cuvette-food-app/Popular categories/"
     const popularCategoriesItems = [
         {
@@ -105,6 +107,7 @@ const Home = () => {
 
     return (
         <div className={styles.container}>
+            <Loader loading={loading} />
             <Header />
             {/* Hero Section */}
             <section className={styles.heroSection}>

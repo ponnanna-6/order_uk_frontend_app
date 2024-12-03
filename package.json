@@ -20,6 +20,7 @@
     "react-jwt": "^1.2.2",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.28.0",
+    "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.6"
   },
   "devDependencies": {
