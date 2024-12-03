@@ -30,3 +30,24 @@ export const getAllFood = async () => {
     };
   }
 };
+
+export const searchFoodItems = async (query) => {
+  try {
+    const res = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/v1/fooditems/search/items`,
+      {
+        params: { query },
+      }
+    );
+
+    return {
+      status: res?.status,
+      data: res?.data,
+    };
+  } catch (error) {
+    return {
+      status: error?.response?.status || 500,
+      message: error?.response?.data?.message || "Something went wrong",
+    };
+  }
+};

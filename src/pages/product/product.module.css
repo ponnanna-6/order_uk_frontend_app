@@ -20,6 +20,83 @@
     padding: 20px;
 }
 
+.searchHeaderConatiner {
+    display: flex;
+    padding: 10px 40px;
+    font-family: 'Arial', sans-serif;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -30px;
+}
+
+.searchHeaderConatiner h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.searchBarContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.searchBarWithIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 100px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 10px;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.searchBar {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    border-radius: 100px;
+}
+
+.searchBar:focus {
+    border-color: #888;
+}
+
+.staticNav {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: var(--app-orange);
+    padding: 10px 40px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.staticNav button {
+    padding: 5px 20px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.staticNav .active {
+    background-color: #03081F;
+    border: 1px solid #000;
+}
+
+
 .foodItemsSection {
     flex: 2;
     display: flex;
@@ -51,6 +128,7 @@
     gap: 1rem;
     padding: 30px;
 }
+
 .offerCard {
     width: 100%;
     background-color: #f9f9f9;
@@ -88,5 +166,9 @@
 
     .foodItems {
         grid-template-columns: 1fr;
+    }
+
+    .searchHeaderConatiner {
+        display: none;
     }
 }

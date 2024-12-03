@@ -11,10 +11,11 @@ import MapWithInfoCard from '../../components/map/map';
 import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
 import { InfoSection } from '../../components/infoSection/infoSection';
 import { CustomerReviews } from '../../components/customerReviews/customerReviews';
-import { getAllFood } from '../../services/food';
+import { getAllFood, searchFoodItems } from '../../services/food';
 import FoodCard from '../../components/foodCard/foodCard';
 import Cart from '../../components/cart/cart';
 import { addItemsToCart, getCartById } from '../../services/cart';
+import { BiSearch } from "react-icons/bi"
 
 
 const Product = () => {
@@ -24,6 +25,7 @@ const Product = () => {
     const [allFoodItems, setAllFoodItems] = useState([])
     const [shouldRefetchCart, setShouldRefetchCart] = useState(false);
     const [cartId, setCartId] = useState(null);
+    const [query, setQuery] = useState('');
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -46,22 +48,19 @@ const Product = () => {
     useEffect(() => {
         const getData = async () => {
             const restaturantById = await getRestaurantById(id)
-            const fooditems = await getAllFood()
-
             setRestautantById(restaturantById.data)
-            setAllFoodItems(fooditems.data)
-
-            const categories = [...new Set(fooditems.data.map(foodItem => foodItem.category))]
-
-            let foodItemsByCategory = {}
-            categories.map((category) => {
-                foodItemsByCategory[category] = fooditems.data.filter((foodItem) => foodItem.category === category)
-            })
-
-            setFoodItems(foodItemsByCategory)
         }
 
         window.scrollTo(0, 0);
+        getData()
+    }, [])
+
+    useEffect(() => {
+        const getData = async () => {
+            const fooditems = await getAllFood()
+            processFoodItems(fooditems.data)
+            setAllFoodItems(fooditems.data)
+        }
         getData()
     }, [])
 
@@ -84,6 +83,17 @@ const Product = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    const processFoodItems = (foodItems) => {
+        const categories = [...new Set(foodItems.map(foodItem => foodItem.category))]
+
+        let foodItemsByCategory = {}
+        categories.map((category) => {
+            foodItemsByCategory[category] = foodItems.filter((foodItem) => foodItem.category === category)
+        })
+
+        setFoodItems(foodItemsByCategory)
+    }
 
     const addItemToCart = async (itemId) => {
         const tempCartData = cartData
@@ -131,6 +141,22 @@ const Product = () => {
         alert("Link copied to clipboard!")
     }
 
+    const handleSearch = async () => {
+        const response = await searchFoodItems(query.trim());
+        if (response.status === 200) {
+            processFoodItems(response.data)
+        } else {
+            console.error('Search Error:', response.message);
+            alert(response.message || 'An error occurred while searching.');
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     function capitalizeFirstLetter(string) {
         if (!string) return "";
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -143,6 +169,34 @@ const Product = () => {
 
             {/* Product Summary */}
             <SummaryCard restaurantData={restaturantById} />
+
+            {/* Search Section  */}
+            <div className={styles.searchHeaderConatiner}>
+                <h2>All Offers from {restaturantById.name}</h2>
+
+                <div className={styles.searchBarContainer}>
+                    <div className={styles.searchBarWithIcon}>
+                        <BiSearch className={styles.searchIcon} onClick={handleSearch} />
+                        <input
+                            type="text"
+                            className={styles.searchBar}
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Search from menu"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/*Static nav bar */}
+            <div className={styles.staticNav}>
+                <button className={styles.active}>Offers</button>
+                <button>Burgers</button>
+                <button>Drinks</button>
+                <button>Salads</button>
+                <button>Pizzas</button>
+            </div>
 
             <div className={styles.offerContainer}>
                 {offerCards.map((card) => (
