@@ -3,7 +3,20 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { GrFormNext } from "react-icons/gr";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { getUserInfo } from '../../services/auth';
+import { useEffect, useState } from 'react';
 const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, isMobile }) => {
+    const [addresses, setAddresses] = useState([])
+
+    useEffect(() => {
+        getAddressinfo()
+    }, [])
+
+    const getAddressinfo = async () => {
+        const userInfo = await getUserInfo()
+        if (!userInfo) return
+        setAddresses(userInfo.data.Addresses)
+    }
 
     const renderHeader = () => {
         if (isMobile) {
@@ -55,7 +68,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
                                 </div>
                                 <div className={styles.addressDetails}>
                                     <h3>Delivery Address</h3>
-                                    <p>45, Green Street, Sector 12 sajdshjdhakd sadnsadkjsadkjhsakjdhsakjhdkjsa</p>
+                                    {addresses.length>0 && <p>{addresses[0].address}, {addresses[0].district}, {addresses[0].state}, {addresses[0].pincode}</p>}
                                 </div>
                             </div>
                             <GrFormNext color='#FC8A06' style={{ fontSize: "2.5rem" }} />
@@ -78,7 +91,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
                                 <h4>{`Subtotal (${cartData.length} items)`}</h4>
                                 <h4>₹{totalAmount + 10}</h4>
                             </div>
-                            
+
                             {isMobile && <div className={styles.dividerLine}></div>}
                         </div>
                         <button className={styles.paymentButton} onClick={onClickPayment}>Choose Payment Method</button>

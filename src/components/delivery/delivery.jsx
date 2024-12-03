@@ -81,8 +81,11 @@ const Delivery = ({ onBack, onSetDefault, isMobile}) => {
                     </div>
                     {userInfo &&addresses.map((address, index) => (
                         <div className={styles.card} key={index}>
-                            <h4>{userInfo.name}</h4>
-                            <p>{address.address}</p>
+                            <div className={styles.cardHeader}>
+                                <h4>{userInfo.name}</h4>
+                                {index == 0 && <p>Default</p>}
+                            </div>
+                            <p>{address.address}, {address.district}, {address.state}, {address.pincode}</p>
                             <p>Phone Number: {address.phoneNumber}</p>
                             {address.isDefault && <div className={styles.defaultBadge}>Default</div>}
                             <div className={styles.editRemove}>
