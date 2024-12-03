@@ -83,7 +83,7 @@ const Payment = ({ onBack, cartData, totalAmount, isMobile }) => {
                 <div className={styles.paymentSummary}>
                     <div className={styles.amount}>
                         <p>Amount to be paid</p>
-                        <p style={{ fontWeight: 'bold', color: '#000' }}>{totalAmount}</p>
+                        <p style={{ fontWeight: 'bold', color: '#000' }}>${totalAmount}</p>
                     </div>
                     <div className={styles.dividerLine} />
                     <button className={styles.paymentButton} onClick={onPay}>Proceed Payment</button>
