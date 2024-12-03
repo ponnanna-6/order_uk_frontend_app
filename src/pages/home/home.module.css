@@ -4,29 +4,6 @@
     font-family: Arial, sans-serif;
 }
 
-.heroSection {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
-    background-color: #fdfdfd;
-}
-
-.heroContent h1 {
-    font-size: 2.5rem;
-    color: #333;
-}
-
-.heroContent h1 span {
-    color: #FC8A06;
-}
-
-.heroContent p {
-    font-size: 1.2rem;
-    color: #666;
-    margin: 1rem 0;
-}
-
 .searchBar {
     display: flex;
     gap: 0.5rem;
@@ -49,12 +26,6 @@
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.heroImage img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
 }
 
 .offersSection {
@@ -123,9 +94,9 @@
     padding: 0;
 }
 
-.card h4{
+.card h4 {
     font-size: 16px;
-    font-weight: 600; 
+    font-weight: 600;
     padding-left: 10px;
     margin-top: 0px;
 }
@@ -270,12 +241,46 @@
         align-items: center;
     }
 
-    .categories {
-        flex-direction: column;
+    .categories h2 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .offersSection .cards {
+        display: flex;
+        overflow-x: scroll;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        background-color: #FBFBFB;
+    }
+
+    .offersSection .cards>* {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .offersSection img {
+        object-fit: contain;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
     }
 
     .popularCategories .cards {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 0.5rem;
+        background-color: #FBFBFB;
+    }
+
+    .popularCategories .card{
+        background-color: #000;
+    }
+
+    .popularCategories .card h4{
+        color: var(--app-orange);
+    }
+    .popularCategories .card p{
+        color: #fff
     }
 }

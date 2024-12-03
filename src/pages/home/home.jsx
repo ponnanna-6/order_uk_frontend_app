@@ -1,7 +1,6 @@
 // HomeScreen.js
 import React, { useEffect, useState } from 'react';
 import styles from './home.module.css';
-import food1 from '../../assets/food/food1.png'
 import Header from '../../components/header/header';
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from '@cloudinary/react';
@@ -12,6 +11,7 @@ import FAQ from '../../components/FAQ/FAQ';
 import Stats from '../../components/stats/stats';
 import { getAllRestaurants, getRestaurantById } from '../../services/restaurant';
 import Loader from '../../components/loader/loader';
+import Hero1 from '../../components/hero1/hero1';
 
 const cld = new Cloudinary({
     cloud: {
@@ -109,31 +109,20 @@ const Home = () => {
         <div className={styles.container}>
             <Loader loading={loading} />
             <Header />
+
             {/* Hero Section */}
-            <section className={styles.heroSection}>
-                <div className={styles.heroContent}>
-                    <h1>Feast Your Senses, <span>Fast and Fresh</span></h1>
-                    <p>Enter a postcode to see what we deliver</p>
-                    <div className={styles.searchBar}>
-                        <input type="text" placeholder="e.g. EC4R 3TE" />
-                        <button>Search</button>
-                    </div>
-                </div>
-                <div className={styles.heroImage}>
-                    <img src={food1} alt="Food Delivery" />
-                </div>
-            </section>
+            <Hero1/>
 
             {/* Discount Offers */}
             <section className={styles.offersSection}>
                 <div className={styles.categories}>
                     <h2>Up to -40% 🎉 Order.uk exclusive deals</h2>
-                    <div>
+                    {!isMobile && <div>
                         <button>Vegan</button>
                         <button>Sushi</button>
                         <button className={styles.active}>Pizza & Fast food</button>
                         <button>others</button>
-                    </div>
+                    </div>}
                 </div>
                 <div className={styles.cards}>
                     {offerCards.map((card, index) => (
@@ -164,7 +153,7 @@ const Home = () => {
             <PopularRestaurants title="Popular Restaurants" />
 
             {/* Hero 2 Section */}
-            <Hero2Section />
+            <Hero2Section isMobile={isMobile}/>
 
             {/* Partner Ride Section */}
             <section className={styles.partnerRiderSection}>

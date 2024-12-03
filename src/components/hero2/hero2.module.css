@@ -3,41 +3,53 @@
 .orderingSection {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
-    background-color: #fff;
+    justify-content: center;
     border: 1px solid #f0f0f0;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 1, 0.1);
     gap: 2rem;
+    margin: 40px;
+    flex-direction: row;
 }
 
 .orderingSection .textContent {
     flex: 1;
-    text-align: left;
+    text-align: center;
 }
 
 .orderingSection .textContent h2 {
-    font-size: 2rem;
+    font-size: 48px;
     font-weight: bold;
-    color: #333;
+    color: #000;
     margin-bottom: 1rem;
+    padding-left: 20px;
 }
 
-.orderingSection .textContent h2 span {
-    color: #ff8800; /* Highlighted text color */
+.highlightedText {
+    color: #ff8800;
+    font-size: 48px;
     font-weight: bold;
+    background-color: #000;
+    padding: 0 15px;
+    border-radius: 0px 120px 120px 0px;
 }
 
-.orderingSection .textContent p {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 1.5rem;
+.downloadText {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+
+
+.highlightedText span {
+    color: #fff
 }
 
 .orderingSection .appButtons {
     display: flex;
     gap: 1rem;
+    justify-content: center;
 }
 
 .orderingSection .appButtons img {
@@ -62,7 +74,11 @@
     max-width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    width: 200px;
+    height: auto;
 }
 
 
@@ -72,12 +88,27 @@
         text-align: center;
     }
 
-    .orderingSection .textContent {
-        order: 2;
-        margin-top: 2rem;
-    }
-
     .orderingSection .imageContainer {
         order: 1;
+    }
+
+    .highlightedText {
+        font-size: 24px;
+        border-radius: 120px;
+        background-color: transparent;
+    }
+
+    .highlightedText span {
+        color : #000;
+    }
+
+    .logo {
+        width: 120px;
+        height: auto;
+    }
+
+    .orderingSection .textContent h2 {
+        font-size: 32px;
+        text-align: center;
     }
 }

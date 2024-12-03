@@ -3,16 +3,17 @@ import styles from './hero2.module.css';
 import appStoreImg from "../../assets/app_store.png";
 import playStoreImg from "../../assets/play_store.png";
 
-export function Hero2Section() {
+export function Hero2Section({isMobile}) {
     return (
         <section className={styles.orderingSection}>
             {/* Text Content Section */}
             <div className={styles.textContent}>
                 <h2>
-                    Ordering <span>UK</span> is more <br />
-                    <span>Personalised & Instant</span>
+                    <img src="/logo.png" alt="logo" className={styles.logo} />
+                    ing is more <br />
                 </h2>
-                <p>Download the Order.uk app for faster ordering</p>
+                <p className={styles.highlightedText}>Personalised<span> & Instant</span></p>
+                <p className={styles.downloadText}>Download the Order.uk app for faster ordering</p>
                 <div className={styles.appButtons}>
                     <img
                         src={appStoreImg}
@@ -24,7 +25,6 @@ export function Hero2Section() {
                     />
                 </div>
             </div>
-
             {/* Image Section */}
             <div className={styles.imageContainer}>
                 <img

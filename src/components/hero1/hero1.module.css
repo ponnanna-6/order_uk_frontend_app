@@ -1,0 +1,103 @@
+.heroSection {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    height: 400px;
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #FBFBFB;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: space-between;
+    justify-content: space-between;
+    align-self: center;
+    padding-left: 20px;
+}
+
+.heroContent h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.heroContent h1 span {
+    color: #FC8A06;
+}
+
+.heroContent p {
+    font-size: 16px;
+    color: #000;
+    margin: 1rem 0;
+}
+
+
+.heroImage img {
+    max-width: 100%;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--app-orange);
+    height: 100%;
+    width: 70%;
+    margin-top: 20px;
+    border-top-left-radius: 500px;
+    justify-content: flex-end;
+}
+
+.rightContainer img {
+    width: 250px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.searchBar {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.searchBar input {
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 100px 0px 0px 100px;
+    flex: 1;
+}
+
+.searchBar button {
+    padding: 0.7rem 1rem;
+    background-color: #FC8A06;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 0px 100px 100px 0px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .heroImage { display: none;}
+    .rightContainer {display: none;}
+    .heroContent {
+        width: 100%;
+        align-items: center;
+        background-color: #03081F;
+        padding: 40px;
+        border-radius: 12px;
+    }
+
+    .heroTexts p{
+        color: white;
+        text-align: center;
+    }
+
+    .heroTexts h1{
+        color: white;
+        text-align: center;
+    }
+}
