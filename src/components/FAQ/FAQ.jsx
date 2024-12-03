@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './FAQ.module.css';
-import placeOrder from "../../assets/faq/placeOrder.png"
-import trackOrder from "../../assets/faq/trackProgress.png"
-import getOrder from "../../assets/faq/getOrder.png"
+import placeOrder from "../../assets/FAQ/placeOrder.png"
+import trackOrder from "../../assets/FAQ/trackProgress.png"
+import getOrder from "../../assets/FAQ/getOrder.png"
 
 const FAQ = ({isMobile}) => {
   const [activeIndex, setActiveIndex] = useState(0);
