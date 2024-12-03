@@ -137,7 +137,7 @@ const Product = () => {
     };
 
     const copyLink = async () => {
-        await navigator.clipboard.writeText(`${window.location.origin}/share/${cartId}`);
+        await navigator.clipboard.writeText(`${window.location.origin}/checkout/${cartId}`);
         alert("Link copied to clipboard!")
     }
 
@@ -231,17 +231,23 @@ const Product = () => {
                 </div>
 
                 {/* Cart Section */}
-                {!isMobile && <div className={styles.cartContainer}>
-                    {cartData.length > 0 && (
-                        <Cart
-                            items={cartData || []}
-                            discounts={12}
-                            deliveryFee={5}
-                            removeItemFromCart={removeItemFromCart}
-                            copyLink={copyLink}
-                        />
-                    )}
-                </div>}
+                {!isMobile && (
+                    <div
+                        className={`${styles.cartContainer} ${cartData.length === 0 ? styles.hidden : ""
+                            }`}
+                    >
+                        {cartData.length > 0 && (
+                            <Cart
+                                items={cartData || []}
+                                discounts={12}
+                                deliveryFee={5}
+                                removeItemFromCart={removeItemFromCart}
+                                copyLink={copyLink}
+                            />
+                        )}
+                    </div>
+                )}
+
             </div>
 
             {/* Info Section */}

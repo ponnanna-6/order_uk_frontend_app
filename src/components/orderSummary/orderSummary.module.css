@@ -118,8 +118,23 @@
     cursor: pointer;
 }
 
+.deliveryAddressDisabled {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-radius: 60px;
+    width: 100%;
+    justify-content: space-between;
+    height: 40px;
+    border: 1px solid #000;
+}
+
 .deliveryAddress:hover {
     background-color: #ccc;
+}
+
+.deliveryAddressDisabled:hover {
+    cursor: not-allowed;
 }
 
 .addressDetails {   
@@ -178,6 +193,11 @@
     font-size: 16px;
     cursor: pointer;
     width: 100%;
+}
+
+.paymentButton:disabled {
+    background-color: #FC8A04;
+    cursor: not-allowed;
 }
 
 .dividerLine {

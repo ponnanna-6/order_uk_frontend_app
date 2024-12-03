@@ -56,6 +56,10 @@
     cursor: pointer;
 }
 
+.hidden {
+    display: none;
+}
+
 .searchBar {
     width: 100%;
     padding: 10px 10px 10px 40px;
@@ -110,7 +114,7 @@
 
 .foodItems {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
 }
 

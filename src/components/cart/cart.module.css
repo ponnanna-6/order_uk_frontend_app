@@ -1,6 +1,5 @@
 .cart {
   background-color: #fff;
-  border: 1px solid #ddd;
   border-radius: 12px;
   max-width: 350px;
   position: sticky;
@@ -8,6 +7,13 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.mainCart {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 12px;
 }
 
 .titleContainer {
@@ -20,10 +26,14 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 30px;
   font-weight: bold;
   color: #fff;
   padding-bottom: 10px;
+}
+
+.totalLabel {
+  font-size: 16px;
 }
 
 .items {
@@ -45,12 +55,21 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-right: 10px;
 }
 
 .quantity {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 18px;
+  color: #fff;
   font-weight: bold;
+  background-color: var(--app-orange);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 30px;
 }
 
 .name {
@@ -67,42 +86,47 @@
 .price {
   font-size: 1rem;
   font-weight: bold;
-  color: #000;
+  color: #028643;
 }
 
 .delete {
-  font-size: 1.5rem;
+  font-size: 12px;
   color: #ff5f5f;
   cursor: pointer;
 }
 
 .summary {
-  border-top: 2px solid #ddd;
   padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .row {
   display: flex;
+  font-family: 'Poppins', sans-serif;
   justify-content: space-between;
-  font-size: 1.2rem;
+  font-size: 16px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 0px 20px 0px 20px;
 }
 
-.discount {
-  color: #ff5f5f;
-  font-weight: bold;
+.amounts {
+  font-weight: normal;
 }
 
 .total {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2rem;
+  font-size: 24px;
   font-weight: bold;
-  margin-top: 10px;
+  margin: 10px;
   background-color: #FC8A06CC;
-  padding: 10px;
+  padding: 15px 20px;
+  border-radius: 5px;
+  color: #fff;
+  align-items: center;
 }
 
 .actions {
@@ -119,6 +143,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  border-radius: 12px;
 }
 
 .shareContatiner p {
@@ -149,13 +174,14 @@
 }
 
 .freeItem {
-  background-color: #f0f0f0;
+  background-color: transparent;
   color: #333;
   border: 1px solid #ddd;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 100px;
   font-size: 0.9rem;
   cursor: pointer;
+  margin: 0px 10px;
 }
 
 .couponInput {
@@ -182,39 +208,94 @@
 .deliveryOptions {
   display: flex;
   gap: 10px;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+  justify-content: space-evenly;
 }
 
-.deliveryTime,
-.collectionTime {
-  flex: 1;
+.actionCard {
+  display: flex;
+  flex-direction: column;
   background-color: #f0f0f0;
-  color: #333;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  text-align: center;
-  cursor: pointer;
+  border-radius: 12px;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.actionCard p {
+  margin: 0;
+}
+
+.actionCard h3 {
+  margin: 0;
 }
 
 .checkout {
+  display: flex;
+  flex-direction: row;
   background-color: #24b324;
   color: white;
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  padding: 10px;
+  padding: 15px 20px;
   border-radius: 5px;
   cursor: pointer;
+  justify-content: flex-start;
+  gap: 40px;
+  align-items: center;
+  margin: 5px;
+}
+
+.checkout span {
+  font-size: 24px;
 }
 
 .checkoutDisabled {
-  background-color: #FFB1B1;
+  display: flex;
+  flex-direction: row;
   color: white;
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  padding: 10px;
+  padding: 15px 20px;
   border-radius: 5px;
+  cursor: pointer;
+  justify-content: flex-start;
+  gap: 40px;
+  align-items: center;
+  margin: 5px;
+  background-color: #FFB1B1;
   cursor: not-allowed;
+}
+
+.icons {
+  width: 30px;
+  height: 30px;
+}
+
+.tooltipWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  width: 150px;
+  top: 150%;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: wrap;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 10;
+}
+
+.checkoutDisabled:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }

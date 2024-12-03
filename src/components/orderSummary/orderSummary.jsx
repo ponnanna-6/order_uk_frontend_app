@@ -4,9 +4,11 @@ import { GrFormNext } from "react-icons/gr";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { getUserInfo } from '../../services/auth';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../contexts/userContext';
 const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, isMobile }) => {
     const [addresses, setAddresses] = useState([])
+    const userInfo = useContext(UserContext)
 
     useEffect(() => {
         getAddressinfo()
@@ -61,14 +63,21 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
                     </div>
                     <div className={styles.orderSummary}>
                         {isMobile && <h2>Delivery Address</h2>}
-                        <div className={styles.deliveryAddress} onClick={onClickDelivery}>
+                        <div
+                            className={!userInfo ? styles.deliveryAddressDisabled : styles.deliveryAddress}
+                            onClick={() => {
+                                if (userInfo) {
+                                    onClickDelivery();
+                                }
+                            }}
+                        >
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 <div className={styles.locationIcon}>
                                     <FaLocationDot color='#FC8A06' />
                                 </div>
                                 <div className={styles.addressDetails}>
                                     <h3>Delivery Address</h3>
-                                    {addresses.length>0 && <p>{addresses[0].address}, {addresses[0].district}, {addresses[0].state}, {addresses[0].pincode}</p>}
+                                    {addresses.length > 0 && <p>{addresses[0].address}, {addresses[0].district}, {addresses[0].state}, {addresses[0].pincode}</p>}
                                 </div>
                             </div>
                             <GrFormNext color='#FC8A06' style={{ fontSize: "2.5rem" }} />
@@ -94,7 +103,7 @@ const OrderSummary = ({ cartData, onClickDelivery, onClickPayment, totalAmount, 
 
                             {isMobile && <div className={styles.dividerLine}></div>}
                         </div>
-                        <button className={styles.paymentButton} onClick={onClickPayment}>Choose Payment Method</button>
+                        <button className={styles.paymentButton} onClick={onClickPayment} disabled={!userInfo}>Choose Payment Method</button>
                     </div>
                 </div>
             ) : (

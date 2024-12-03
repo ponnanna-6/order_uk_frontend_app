@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import styles from './checkout.module.css';
-import { getCartById } from '../../services/cart';
+import { getCartById, shareCartData } from '../../services/cart';
 import Header from '../../components/header/header';
 import { PopularRestaurants } from '../../components/popularRestaurants/popularRestaurants';
 import Footer from '../../components/footer/footer';
 import OrderSummary from '../../components/orderSummary/orderSummary';
 import Delivery from '../../components/delivery/delivery';
 import Payment from '../../components/payment/payment';
+import { useParams } from 'react-router-dom';
 
 const Checkout = () => {
     const [cartData, setCartData] = useState([]);
     const [activeStep, setActiveStep] = useState("OrderSummary");
     const [totalAmount, setTotalAmount] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const { id } = useParams();
+    console.log(id)
 
     useEffect(() => {
         const getCartData = async () => {
-            const cartData = await getCartById();
+            let cartData = [];
+            if(id) {
+                cartData = await shareCartData(id);
+            } else {
+               cartData = await getCartById(id);
+            }
             setCartData(cartData.data.cart.items);
 
             let totalAmount = cartData.data.cart.items.reduce((total, item) => {
